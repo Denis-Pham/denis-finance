@@ -7,6 +7,12 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.1.3] — 2026-07-13
+
+- Thêm chủ đề **Bảo hiểm – Thuế – Hưu trí** (`bao-hiem-thue-huu-tri`) — lớp phòng vệ hiện tại và kế hoạch tài chính dài hạn.
+- Thêm bài **Ưu tiên bảo hiểm cho gia đình: bảo vệ điều quan trọng trước** (`uu-tien-bao-hiem-cho-gia-dinh`).
+- Thêm bài **Chuẩn bị hưu trí từ tuổi 30: thời gian quan trọng hơn khởi đầu lớn** (`chuan-bi-huu-tri-tu-tuoi-30`).
+
 ## [0.1.2] — 2026-07-13
 
 - Thêm chủ đề **Nợ & Tín dụng** (`no-va-tin-dung`) — chủ đề thứ 6, theo đề xuất taxonomy của Hermes.
