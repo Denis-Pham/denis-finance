@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../../components/PostCard.astro';
+import { withBase } from '../../config/site';
 
 const topics = (await getCollection('topics')).sort((a, b) => a.data.order - b.data.order);
 const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
@@ -25,12 +26,12 @@ const topicById = new Map(topics.map((t) => [t.id, t]));
   <section class="section" style="padding-top: 0;">
     <div class="wrap">
       <nav class="filter-bar" aria-label="Lọc theo chủ đề" data-reveal>
-        <a class="chip is-active" href="/bai-viet/" data-filter="">Tất cả</a>
+        <a class="chip is-active" href={withBase('/bai-viet/')} data-filter="">Tất cả</a>
         {
           topics.map((t) => (
             <a
               class="chip"
-              href={`/bai-viet/?chu-de=${t.id}`}
+              href={withBase(`/bai-viet/?chu-de=${t.id}`)}
               data-filter={t.id}
               style={`--chip-color:${t.data.color}`}
             >

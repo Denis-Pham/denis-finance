@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { withBase } from '../config/site';
 
 interface Props {
   post: CollectionEntry<'posts'>;
@@ -12,7 +13,7 @@ const dateStr = new Intl.DateTimeFormat('vi-VN', { day: 'numeric', month: 'long'
 ---
 
 <article class="card post-card" data-tilt>
-  <a class="post-link" href={`/bai-viet/${post.id}/`}>
+  <a class="post-link" href={withBase(`/bai-viet/${post.id}/`)}>
     <div class="post-meta">
       <span class="chip" style={`--chip-color:${topicColor}`}>{topicTitle}</span>
       <time datetime={pubDate.toISOString()}>{dateStr}</time>

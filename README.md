@@ -47,11 +47,17 @@ rsync -avz --delete dist/ user@vps:/var/www/denis-finance/
 Rồi dùng server block trong [deploy/nginx.conf](deploy/nginx.conf) (đổi `root` thành
 `/var/www/denis-finance`).
 
-### Cách 3 — GitHub Pages
+### Cách 3 — GitHub Pages (ĐÃ thiết lập, tự động)
 
-Site là static thuần nên chỉ cần build rồi đẩy `dist/` lên Pages (hoặc dùng GitHub Actions
-`withastro/action`). Lưu ý: nếu chạy ở địa chỉ `https://<user>.github.io/<repo>/` thì phải thêm
-`base: '/<repo>'` vào `astro.config.mjs` — dùng custom domain thì không cần.
+Mỗi lần push `main`, workflow [.github/workflows/deploy.yml](.github/workflows/deploy.yml)
+tự build và deploy lên **https://denis-pham.github.io/denis-finance/**.
+
+- Base path `/denis-finance` chỉ áp cho build Pages (qua env `DEPLOY_BASE`/`DEPLOY_SITE`
+  trong workflow) — build local/VPS vẫn ở root `/`.
+- **Quy ước code:** mọi link nội bộ viết tay phải qua helper `withBase()` từ
+  `src/config/site.ts` (đừng hardcode `href="/..."`), không thì link sẽ gãy trên Pages.
+- Sau này có custom domain: xoá 2 env đó trong workflow + set `site` thật trong
+  `astro.config.mjs` là xong.
 
 ## Tuỳ biến
 

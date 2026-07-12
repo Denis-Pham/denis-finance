@@ -2,6 +2,16 @@
  * Cấu hình brand — ĐỔI Ở ĐÂY LÀ ĐỔI TOÀN SITE.
  * TODO(Denis): thay tên kênh, handle và channelUrl bằng kênh thật.
  */
+/**
+ * Prefix base path cho link nội bộ — cần cho GitHub Pages (subpath /denis-finance).
+ * Build local/VPS có base '/' nên trả về path nguyên vẹn.
+ * Dùng cho MỌI href/src nội bộ viết tay: withBase('/chu-de/').
+ */
+export function withBase(path: string): string {
+  const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
+  return `${base}${path}`;
+}
+
 export const SITE = {
   name: 'Denis Finance',
   shortName: 'DF',

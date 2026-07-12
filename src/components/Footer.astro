@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { SITE } from '../config/site';
+import { SITE, withBase } from '../config/site';
 
 const topics = (await getCollection('topics')).sort((a, b) => a.data.order - b.data.order);
 const year = new Date().getFullYear();
@@ -9,7 +9,7 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div class="footer-brand">
-      <a class="brand" href="/">
+      <a class="brand" href={withBase('/')}>
         <span class="brand-mark" aria-hidden="true">{SITE.shortName}</span>
         <span>{SITE.name}</span>
       </a>
@@ -23,7 +23,7 @@ const year = new Date().getFullYear();
       <h3>Chủ đề</h3>
       <ul>
         {topics.map((t) => (
-          <li><a href={`/chu-de/${t.id}/`}>{t.data.title}</a></li>
+          <li><a href={withBase(`/chu-de/${t.id}/`)}>{t.data.title}</a></li>
         ))}
       </ul>
     </nav>
@@ -31,10 +31,10 @@ const year = new Date().getFullYear();
     <nav aria-label="Khám phá">
       <h3>Khám phá</h3>
       <ul>
-        <li><a href="/bai-viet/">Tất cả bài viết</a></li>
-        <li><a href="/chu-de/">Tất cả chủ đề</a></li>
-        <li><a href="/gioi-thieu/">Giới thiệu</a></li>
-        <li><a href="/rss.xml">RSS feed</a></li>
+        <li><a href={withBase('/bai-viet/')}>Tất cả bài viết</a></li>
+        <li><a href={withBase('/chu-de/')}>Tất cả chủ đề</a></li>
+        <li><a href={withBase('/gioi-thieu/')}>Giới thiệu</a></li>
+        <li><a href={withBase('/rss.xml')}>RSS feed</a></li>
       </ul>
     </nav>
   </div>

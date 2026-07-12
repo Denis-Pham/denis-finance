@@ -3,7 +3,7 @@ import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../../components/PostCard.astro';
 import VideoCard from '../../components/VideoCard.astro';
-import { SITE } from '../../config/site';
+import { SITE, withBase } from '../../config/site';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => !data.draft);
@@ -50,7 +50,7 @@ const articleLd = JSON.stringify({
       <nav class="post-breadcrumb" aria-label="Breadcrumb" data-reveal>
         {
           topic && (
-            <a class="chip" style={`--chip-color:${topic.data.color}`} href={`/chu-de/${topic.id}/`}>
+            <a class="chip" style={`--chip-color:${topic.data.color}`} href={withBase(`/chu-de/${topic.id}/`)}>
               {topic.data.title}
             </a>
           )

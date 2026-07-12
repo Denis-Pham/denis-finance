@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE } from '../config/site';
+import { SITE, withBase } from '../config/site';
 
 /* TODO(Denis): thay lời chào / câu chuyện bằng giọng của anh. Khung dưới là bản nháp. */
 ---
@@ -58,9 +58,9 @@ import { SITE } from '../config/site';
         <div class="card about-card">
           <h3>Bắt đầu từ đâu?</h3>
           <ol>
-            <li><a href="/chu-de/quan-ly-chi-tieu/">Quản lý chi tiêu</a> — nếu bạn chưa biết tiền đi đâu.</li>
-            <li><a href="/chu-de/tiet-kiem-quy-du-phong/">Quỹ dự phòng</a> — nếu chưa có tấm đệm 3–6 tháng.</li>
-            <li><a href="/chu-de/dau-tu-cho-nguoi-moi/">Đầu tư cho người mới</a> — khi hai bước trên đã vững.</li>
+            <li><a href={withBase('/chu-de/quan-ly-chi-tieu/')}>Quản lý chi tiêu</a> — nếu bạn chưa biết tiền đi đâu.</li>
+            <li><a href={withBase('/chu-de/tiet-kiem-quy-du-phong/')}>Quỹ dự phòng</a> — nếu chưa có tấm đệm 3–6 tháng.</li>
+            <li><a href={withBase('/chu-de/dau-tu-cho-nguoi-moi/')}>Đầu tư cho người mới</a> — khi hai bước trên đã vững.</li>
           </ol>
           <a class="btn" href={SITE.channelUrl} target="_blank" rel="noopener noreferrer">
             Đăng ký {SITE.channelHandle}

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../config/site';
 ---
 
 <BaseLayout title="Không tìm thấy trang" description="Trang bạn tìm không tồn tại.">
@@ -11,8 +12,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         Đường dẫn không tồn tại hoặc đã được chuyển đi. May là danh mục chính vẫn còn nguyên.
       </p>
       <div class="nf-actions">
-        <a class="btn" href="/">Về trang chủ</a>
-        <a class="btn btn--ghost" href="/chu-de/">Xem các chủ đề</a>
+        <a class="btn" href={withBase('/')}>Về trang chủ</a>
+        <a class="btn btn--ghost" href={withBase('/chu-de/')}>Xem các chủ đề</a>
       </div>
     </div>
   </section>

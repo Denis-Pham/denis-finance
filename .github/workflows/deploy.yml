@@ -1,0 +1,47 @@
+# Deploy site tĩnh lên GitHub Pages mỗi lần push main.
+# Pages URL: https://denis-pham.github.io/denis-finance/
+# Base path chỉ áp cho build này qua env — build local/VPS vẫn chạy ở root "/".
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      DEPLOY_SITE: https://denis-pham.github.io
+      DEPLOY_BASE: /denis-finance
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure Pages (tự bật Pages nếu chưa bật)
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Build Astro
+        uses: withastro/action@v3
+        with:
+          node-version: 22
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

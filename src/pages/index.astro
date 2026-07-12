@@ -6,7 +6,7 @@ import Hero3D from '../components/Hero3D.astro';
 import SectionHead from '../components/SectionHead.astro';
 import TopicCard from '../components/TopicCard.astro';
 import PostCard from '../components/PostCard.astro';
-import { SITE } from '../config/site';
+import { SITE, withBase } from '../config/site';
 
 const topics = (await getCollection('topics')).sort((a, b) => a.data.order - b.data.order);
 const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
@@ -64,7 +64,7 @@ const principles = [
         eyebrow="Kho kiến thức"
         title="Tra cứu theo chủ đề"
         lead="Mỗi chủ đề là một playlist trên YouTube: xem video, đọc bài viết đào sâu, tải công cụ đi kèm."
-        link={{ href: '/chu-de/', label: 'Tất cả chủ đề' }}
+        link={{ href: withBase('/chu-de/'), label: 'Tất cả chủ đề' }}
       />
       <div class="grid grid--3 topics-grid">
         {
@@ -83,7 +83,7 @@ const principles = [
       <SectionHead
         eyebrow="Mới trên blog"
         title="Bài viết mới nhất"
-        link={{ href: '/bai-viet/', label: 'Tất cả bài viết' }}
+        link={{ href: withBase('/bai-viet/'), label: 'Tất cả bài viết' }}
       />
       <div class="grid grid--3">
         {
@@ -129,7 +129,7 @@ const principles = [
         </div>
         <div class="cta-actions">
           <a class="btn" href={SITE.channelUrl} target="_blank" rel="noopener noreferrer">Đăng ký {SITE.channelHandle}</a>
-          <a class="btn btn--ghost" href="/rss.xml">Theo dõi qua RSS</a>
+          <a class="btn btn--ghost" href={withBase('/rss.xml')}>Theo dõi qua RSS</a>
         </div>
       </div>
     </div>

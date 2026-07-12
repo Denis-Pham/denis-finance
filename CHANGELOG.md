@@ -7,6 +7,14 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.2.1] — 2026-07-12
+
+Deploy GitHub Pages (https://denis-pham.github.io/denis-finance/):
+
+- Workflow `.github/workflows/deploy.yml` — build + deploy tự động mỗi lần push main (withastro/action, actions/deploy-pages, tự bật Pages qua configure-pages `enablement: true`).
+- `astro.config.mjs` đọc `DEPLOY_SITE`/`DEPLOY_BASE` từ env: Pages build ở subpath `/denis-finance`, build local/VPS giữ nguyên root `/`.
+- Helper `withBase()` (`src/config/site.ts`) áp cho MỌI link nội bộ viết tay (header, footer, card, chip, breadcrumb, RSS, favicon...) — quy ước mới: link nội bộ luôn qua `withBase()`, đừng hardcode `href="/..."`.
+
 ## [0.2.0] — 2026-07-12
 
 Nâng cấp 3D theo yêu cầu Denis (trước đây chỉ hero có 3D):
