@@ -71,6 +71,12 @@ const JOBS = [
     prompt: `A golden umbrella sheltering a neat stack of golden coins, beside an elegant golden hourglass with emerald glass sand, calm protective mood. ${STYLE}`,
   },
   {
+    name: 'topic-tai-chinh-doi-thuc',
+    aspect: '1:1',
+    model: 'gpt-image-2-low',
+    prompt: `A golden lotus flower with emerald glass leaves floating on a calm dark pond, golden coins resting like lily pads around it, serene Vietnamese-inspired mood. ${STYLE}`,
+  },
+  {
     name: 'og',
     aspect: '16:9',
     model: 'gpt-image-2-medium',
