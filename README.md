@@ -29,7 +29,7 @@ python -m http.server 8080 --directory dist
 ### Cách 1 — VPS bằng Docker (khuyên dùng)
 
 ```bash
-git clone <repo> && cd denis-finance/deploy
+git clone https://github.com/Denis-Pham/denis-finance.git && cd denis-finance/deploy
 docker compose up -d --build
 # site chạy ở 127.0.0.1:8688 — trỏ reverse proxy (nginx/caddy) vào đây + gắn HTTPS
 ```
