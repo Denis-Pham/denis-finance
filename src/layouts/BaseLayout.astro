@@ -1,0 +1,78 @@
+---
+import '@fontsource/be-vietnam-pro/400.css';
+import '@fontsource/be-vietnam-pro/500.css';
+import '@fontsource/be-vietnam-pro/600.css';
+import '@fontsource/be-vietnam-pro/700.css';
+import '@fontsource/playfair-display/600.css';
+import '@fontsource/playfair-display/700.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../config/site';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string | undefined;
+  article?: boolean;
+}
+
+const { title, description = SITE.description, ogImage, article = false } = Astro.props;
+const site = Astro.site ?? new URL(SITE.url);
+const canonical = new URL(Astro.url.pathname, site);
+const fullTitle = title === SITE.name ? `${SITE.name} — ${SITE.tagline}` : `${title} — ${SITE.name}`;
+const ogImageUrl = ogImage ? new URL(ogImage, site).toString() : undefined;
+
+const websiteLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE.name,
+  url: site.toString(),
+  description: SITE.description,
+  inLanguage: 'vi',
+  sameAs: [SITE.channelUrl],
+});
+---
+
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={SITE.author} />
+    <meta name="theme-color" content="#05070d" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title={SITE.name} href={new URL('rss.xml', site)} />
+
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content="vi_VN" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+    <meta name="twitter:card" content={ogImageUrl ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+
+    <script type="application/ld+json" set:html={websiteLd} />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Bỏ qua điều hướng</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import '../scripts/fx';
+    </script>
+  </body>
+</html>

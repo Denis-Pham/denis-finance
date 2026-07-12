@@ -1,0 +1,129 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  topic: CollectionEntry<'topics'>;
+  img?: ImageMetadata | undefined;
+  postCount?: number;
+}
+const { topic, img, postCount = 0 } = Astro.props;
+const { title, tagline, color } = topic.data;
+
+/* SVG fallback khi chưa có ảnh minh họa từ hermes — icon nét vàng theo chủ đề */
+const icons: Record<string, string> = {
+  'quan-ly-chi-tieu': `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="12" width="36" height="26" rx="3"/><path d="M6 19h36"/><circle cx="33" cy="29" r="3.4"/><path d="M12 12V9a3 3 0 0 1 3-3h18a3 3 0 0 1 3 3v3"/></svg>`,
+  'tiet-kiem-quy-du-phong': `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5l15 5v10c0 10-6.5 17.5-15 21-8.5-3.5-15-11-15-21V10l15-5z"/><path d="M17 24.5l5 5 9-10"/></svg>`,
+  'dau-tu-cho-nguoi-moi': `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="36" r="6.5"/><path d="M24 29.5V16"/><path d="M24 20c0-6 4-10 10.5-10.5C34 16 30 20 24 20z"/><path d="M24 16c0-5-3.4-8.4-9-8.8.4 5.4 3.8 8.8 9 8.8z"/></svg>`,
+  'tai-chinh-gia-dinh': `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22L24 8l16 14"/><path d="M12 20v18h24V20"/><path d="M24 34c-3.6-2.6-6-4.8-6-7.4 0-1.9 1.5-3.4 3.4-3.4 1.1 0 2.1.5 2.6 1.4.5-.9 1.5-1.4 2.6-1.4 1.9 0 3.4 1.5 3.4 3.4 0 2.6-2.4 4.8-6 7.4z"/></svg>`,
+  'tu-duy-tien-bac': `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><path d="M31 17l-4.2 9.8L17 31l4.2-9.8L31 17z"/><circle cx="24" cy="24" r="1.6" fill="currentColor"/></svg>`,
+};
+const fallbackIcon = icons[topic.id] ?? icons['tu-duy-tien-bac'];
+---
+
+<a class="card topic-card" href={`/chu-de/${topic.id}/`} data-tilt style={`--tc:${color}`}>
+  <div class="topic-media" aria-hidden="true">
+    {
+      img ? (
+        <Image src={img} alt="" width={640} height={640} loading="lazy" />
+      ) : (
+        <span class="topic-icon" set:html={fallbackIcon} />
+      )
+    }
+  </div>
+  <div class="topic-body">
+    <h3>{title}</h3>
+    <p>{tagline}</p>
+    <span class="topic-meta">
+      <span class="dot" aria-hidden="true"></span>
+      {postCount > 0 ? `${postCount} bài viết` : 'Bài viết đang soạn'} · Playlist YouTube
+    </span>
+  </div>
+  <span class="topic-arrow" aria-hidden="true">→</span>
+  <span class="tilt-glare" aria-hidden="true"></span>
+</a>
+
+<style>
+  .topic-card {
+    display: flex;
+    flex-direction: column;
+    color: var(--fg);
+    min-height: 100%;
+  }
+  .topic-media {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(120% 90% at 70% 0%, color-mix(in srgb, var(--tc) 14%, transparent), transparent 60%),
+      linear-gradient(200deg, var(--surface-2), var(--surface));
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .topic-media :global(img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .topic-icon {
+    width: 64px;
+    height: 64px;
+    color: var(--tc, var(--gold));
+    opacity: 0.9;
+  }
+  .topic-icon :global(svg) { width: 100%; height: 100%; }
+  .topic-body {
+    padding: 22px 24px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  h3 {
+    font-size: 21px;
+    margin: 0;
+  }
+  p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14.5px;
+  }
+  .topic-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+    color: var(--muted-soft);
+  }
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--tc, var(--gold));
+  }
+  .topic-arrow {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border-strong);
+    border-radius: 50%;
+    color: var(--fg);
+    background: rgba(5, 7, 13, 0.45);
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .topic-card:hover .topic-arrow {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #0a0a04;
+  }
+</style>

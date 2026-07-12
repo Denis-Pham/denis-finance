@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../config/site';
+
+/* TODO(Denis): thay lời chào / câu chuyện bằng giọng của anh. Khung dưới là bản nháp. */
+---
+
+<BaseLayout
+  title="Giới thiệu"
+  description={`${SITE.name} là ai, vì sao có kênh này, và bạn sẽ nhận được gì khi theo dõi.`}
+>
+  <section class="section page-hero">
+    <div class="wrap" data-reveal>
+      <p class="eyebrow">Giới thiệu</p>
+      <h1>Xin chào, mình là {SITE.author}.</h1>
+      <p class="lead">
+        Một người làm quản lý dự án, một người chồng, một người bố — và là người
+        trực tiếp vận hành “hệ điều hành tài chính” của gia đình mình mỗi ngày.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap about-grid">
+      <div class="prose" data-reveal>
+        <h2>Vì sao có kênh này?</h2>
+        <p>
+          Mình không phải chuyên gia tài chính được cấp phép, càng không phải người
+          “chiến thắng thị trường”. Mình là người <strong>thực hành</strong>: tự ghi chép chi tiêu,
+          tự dựng dashboard theo dõi tài sản, tự tổ chức họp tài chính gia đình hàng tháng —
+          và vấp đủ các sai lầm kinh điển trước khi hệ thống chạy trơn.
+        </p>
+        <p>
+          Kênh này ra đời để chia sẻ lại đúng những gì mình đang vận hành: có số liệu,
+          có công cụ, có cả những chỗ từng làm sai. Không phím hàng, không bán khoá học
+          làm giàu, không lời hứa tự do tài chính sau 90 ngày.
+        </p>
+        <h2>Bạn sẽ nhận được gì?</h2>
+        <ul>
+          <li><strong>Video mỗi tuần</strong> — mỗi video kết thúc bằng một việc làm được ngay.</li>
+          <li><strong>Bài viết đào sâu</strong> — phiên bản chữ kèm bảng số và ví dụ chi tiết.</li>
+          <li><strong>Công cụ tự làm</strong> — template, checklist, dashboard miễn phí.</li>
+        </ul>
+        <blockquote>
+          <p>
+            Tài chính cá nhân không phải cuộc đua với người khác — nó là hệ thống nhỏ
+            mình xây cho chính gia đình mình, chạy bền qua từng năm.
+          </p>
+        </blockquote>
+        <p>
+          <em>Lưu ý minh bạch:</em> mọi nội dung trên kênh và blog mang tính giáo dục,
+          dựa trên trải nghiệm cá nhân, <strong>không phải lời khuyên đầu tư</strong> cho
+          trường hợp cụ thể của bạn.
+        </p>
+      </div>
+
+      <aside class="about-side" data-reveal>
+        <div class="card about-card">
+          <h3>Bắt đầu từ đâu?</h3>
+          <ol>
+            <li><a href="/chu-de/quan-ly-chi-tieu/">Quản lý chi tiêu</a> — nếu bạn chưa biết tiền đi đâu.</li>
+            <li><a href="/chu-de/tiet-kiem-quy-du-phong/">Quỹ dự phòng</a> — nếu chưa có tấm đệm 3–6 tháng.</li>
+            <li><a href="/chu-de/dau-tu-cho-nguoi-moi/">Đầu tư cho người mới</a> — khi hai bước trên đã vững.</li>
+          </ol>
+          <a class="btn" href={SITE.channelUrl} target="_blank" rel="noopener noreferrer">
+            Đăng ký {SITE.channelHandle}
+          </a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero h1 {
+    font-size: clamp(34px, 5vw, 54px);
+    margin: 16px 0 14px;
+  }
+  .page-hero { padding-bottom: 42px; }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .about-card {
+    padding: 28px;
+    position: sticky;
+    top: 96px;
+  }
+  .about-card h3 { font-size: 20px; }
+  .about-card ol {
+    padding-left: 1.2em;
+    margin: 0 0 22px;
+    color: var(--muted);
+    font-size: 14.5px;
+  }
+  .about-card li { margin-bottom: 10px; }
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .about-card { position: static; }
+  }
+</style>

@@ -1,0 +1,129 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import VideoCard from '../../components/VideoCard.astro';
+import { SITE } from '../../config/site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, videoId } = post.data;
+const { Content } = await render(post);
+
+const topic = await getEntry(post.data.topic);
+const related = (
+  await getCollection(
+    'posts',
+    ({ data, id }) => !data.draft && data.topic.id === post.data.topic.id && id !== post.id
+  )
+)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 2);
+
+const dateStr = new Intl.DateTimeFormat('vi-VN', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+}).format(pubDate);
+
+const articleLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  inLanguage: 'vi',
+  author: { '@type': 'Person', name: SITE.author, url: SITE.channelUrl },
+  publisher: { '@type': 'Organization', name: SITE.name },
+});
+---
+
+<BaseLayout title={title} description={description} article>
+  <script type="application/ld+json" set:html={articleLd} slot="head" />
+
+  <article class="section post-article">
+    <div class="wrap post-wrap">
+      <nav class="post-breadcrumb" aria-label="Breadcrumb" data-reveal>
+        {
+          topic && (
+            <a class="chip" style={`--chip-color:${topic.data.color}`} href={`/chu-de/${topic.id}/`}>
+              {topic.data.title}
+            </a>
+          )
+        }
+        <time datetime={pubDate.toISOString()}>{dateStr}</time>
+      </nav>
+
+      <h1 data-reveal>{title}</h1>
+      <p class="lead post-lead" data-reveal>{description}</p>
+
+      {
+        videoId && (
+          <div class="post-video" data-reveal>
+            <VideoCard id={videoId} title="Xem video của bài viết này trên YouTube" />
+          </div>
+        )
+      }
+
+      <div class="prose">
+        <Content />
+      </div>
+
+      <div class="post-cta card" data-reveal>
+        <p>
+          Bài viết hữu ích? Kênh còn video minh hoạ từng bước cho chủ đề
+          {topic ? ` “${topic.data.title}”` : ' này'}.
+        </p>
+        <a class="btn btn--sm" href={SITE.channelUrl} target="_blank" rel="noopener noreferrer">
+          Đăng ký {SITE.channelHandle}
+        </a>
+      </div>
+
+      {
+        related.length > 0 && topic && (
+          <aside class="post-related">
+            <h2>Đọc tiếp cùng chủ đề</h2>
+            <div class="grid grid--2">
+              {related.map((p) => (
+                <PostCard post={p} topicTitle={topic.data.title} topicColor={topic.data.color} />
+              ))}
+            </div>
+          </aside>
+        )
+      }
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-wrap { max-width: 860px; }
+  .post-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 26px;
+  }
+  .post-breadcrumb time { color: var(--muted-soft); font-size: 13.5px; }
+  h1 {
+    font-size: clamp(30px, 4.6vw, 50px);
+    max-width: 22ch;
+  }
+  .post-lead { margin-bottom: 34px; }
+  .post-video { max-width: 560px; margin-bottom: 38px; }
+  .prose { margin-bottom: 48px; }
+  .post-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 24px 28px;
+    margin-bottom: 56px;
+  }
+  .post-cta p { margin: 0; color: var(--muted); max-width: 46ch; }
+  .post-related h2 { font-size: 26px; margin-bottom: 24px; }
+</style>

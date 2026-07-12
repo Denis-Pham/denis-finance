@@ -1,0 +1,109 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+
+const topics = (await getCollection('topics')).sort((a, b) => a.data.order - b.data.order);
+const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const topicById = new Map(topics.map((t) => [t.id, t]));
+---
+
+<BaseLayout
+  title="Bài viết"
+  description="Tất cả bài viết của blog — lọc nhanh theo chủ đề, mỗi chủ đề gắn với một playlist YouTube."
+>
+  <section class="section page-hero">
+    <div class="wrap" data-reveal>
+      <p class="eyebrow">Blog</p>
+      <h1>Tất cả bài viết</h1>
+      <p class="lead">Phiên bản chữ của các video — kèm số liệu, bảng biểu và công cụ tải về.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <nav class="filter-bar" aria-label="Lọc theo chủ đề" data-reveal>
+        <a class="chip is-active" href="/bai-viet/" data-filter="">Tất cả</a>
+        {
+          topics.map((t) => (
+            <a
+              class="chip"
+              href={`/bai-viet/?chu-de=${t.id}`}
+              data-filter={t.id}
+              style={`--chip-color:${t.data.color}`}
+            >
+              {t.data.title}
+            </a>
+          ))
+        }
+      </nav>
+
+      <div class="grid grid--3" id="posts-grid">
+        {
+          posts.map((p) => {
+            const t = topicById.get(p.data.topic.id);
+            return (
+              <div data-topic={p.data.topic.id} data-reveal>
+                <PostCard
+                  post={p}
+                  topicTitle={t?.data.title ?? ''}
+                  topicColor={t?.data.color ?? '#d4af37'}
+                />
+              </div>
+            );
+          })
+        }
+      </div>
+      <p class="lead" id="filter-empty" hidden>Chưa có bài viết nào trong chủ đề này.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero h1 {
+    font-size: clamp(34px, 5vw, 54px);
+    margin: 16px 0 14px;
+  }
+  .page-hero { padding-bottom: 42px; }
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+  #posts-grid > div { min-height: 100%; }
+</style>
+
+<script>
+  // Lọc client-side theo ?chu-de=<slug>. Không có JS → hiện tất cả (degrade ổn).
+  const grid = document.getElementById('posts-grid');
+  const empty = document.getElementById('filter-empty');
+  const chips = document.querySelectorAll<HTMLAnchorElement>('.filter-bar [data-filter]');
+
+  function apply(topicId: string): void {
+    if (!grid || !empty) return;
+    let shown = 0;
+    grid.querySelectorAll<HTMLElement>('[data-topic]').forEach((cell) => {
+      const show = !topicId || cell.dataset.topic === topicId;
+      cell.style.display = show ? '' : 'none';
+      if (show) shown++;
+    });
+    chips.forEach((c) => c.classList.toggle('is-active', (c.dataset.filter ?? '') === topicId));
+    empty.hidden = shown > 0;
+  }
+
+  const current = () => new URLSearchParams(location.search).get('chu-de') ?? '';
+
+  chips.forEach((chip) =>
+    chip.addEventListener('click', (e) => {
+      e.preventDefault();
+      const t = chip.dataset.filter ?? '';
+      history.pushState({}, '', t ? `${location.pathname}?chu-de=${t}` : location.pathname);
+      apply(t);
+    })
+  );
+  window.addEventListener('popstate', () => apply(current()));
+  apply(current());
+</script>

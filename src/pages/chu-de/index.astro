@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+import type { ImageMetadata } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TopicCard from '../../components/TopicCard.astro';
+
+const topics = (await getCollection('topics')).sort((a, b) => a.data.order - b.data.order);
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+
+const postCount: Record<string, number> = {};
+for (const p of posts) postCount[p.data.topic.id] = (postCount[p.data.topic.id] ?? 0) + 1;
+
+const ills = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/illustrations/*.{png,jpg,jpeg,webp}',
+  { eager: true }
+);
+const ill = (name: string): ImageMetadata | undefined =>
+  Object.entries(ills).find(([path]) => path.includes(`/${name}.`))?.[1].default;
+---
+
+<BaseLayout
+  title="Chủ đề"
+  description="Toàn bộ chủ đề của kênh — mỗi chủ đề là một playlist YouTube kèm chuỗi bài viết đào sâu."
+>
+  <section class="section page-hero">
+    <div class="wrap" data-reveal>
+      <p class="eyebrow">Kho kiến thức</p>
+      <h1>Chọn chủ đề bạn đang cần</h1>
+      <p class="lead">
+        Mỗi chủ đề tương ứng một playlist trên YouTube. Video cho bức tranh nhanh —
+        bài viết cho phần đào sâu, số liệu và công cụ đi kèm.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="grid grid--3">
+        {
+          topics.map((t) => (
+            <div data-reveal>
+              <TopicCard topic={t} img={ill(t.data.illustration)} postCount={postCount[t.id] ?? 0} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero h1 {
+    font-size: clamp(34px, 5vw, 54px);
+    margin: 16px 0 14px;
+  }
+  .page-hero { padding-bottom: 42px; }
+</style>

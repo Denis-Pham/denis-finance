@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Không tìm thấy trang" description="Trang bạn tìm không tồn tại.">
+  <section class="section nf">
+    <div class="wrap" data-reveal>
+      <p class="eyebrow">Lỗi 404</p>
+      <h1>Trang này đã bị…<br /><em>chi tiêu mất rồi.</em></h1>
+      <p class="lead">
+        Đường dẫn không tồn tại hoặc đã được chuyển đi. May là danh mục chính vẫn còn nguyên.
+      </p>
+      <div class="nf-actions">
+        <a class="btn" href="/">Về trang chủ</a>
+        <a class="btn btn--ghost" href="/chu-de/">Xem các chủ đề</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf {
+    min-height: 62vh;
+    display: flex;
+    align-items: center;
+  }
+  h1 {
+    font-size: clamp(38px, 6vw, 66px);
+    margin: 18px 0 16px;
+  }
+  h1 em { color: var(--gold); font-style: italic; }
+  .nf-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+</style>

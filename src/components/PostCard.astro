@@ -1,0 +1,72 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+  topicTitle: string;
+  topicColor: string;
+}
+const { post, topicTitle, topicColor } = Astro.props;
+const { title, description, pubDate } = post.data;
+const dateStr = new Intl.DateTimeFormat('vi-VN', { day: 'numeric', month: 'long', year: 'numeric' }).format(pubDate);
+---
+
+<article class="card post-card" data-tilt>
+  <a class="post-link" href={`/bai-viet/${post.id}/`}>
+    <div class="post-meta">
+      <span class="chip" style={`--chip-color:${topicColor}`}>{topicTitle}</span>
+      <time datetime={pubDate.toISOString()}>{dateStr}</time>
+    </div>
+    <h3>{title}</h3>
+    <p>{description}</p>
+    <span class="post-more">Đọc tiếp <span aria-hidden="true">→</span></span>
+  </a>
+  <span class="tilt-glare" aria-hidden="true"></span>
+</article>
+
+<style>
+  .post-card { height: 100%; }
+  .post-link {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: 100%;
+    padding: 26px;
+    color: var(--fg);
+  }
+  .post-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  time {
+    color: var(--muted-soft);
+    font-size: 13px;
+  }
+  h3 {
+    font-size: 20.5px;
+    line-height: 1.3;
+    margin: 0;
+  }
+  p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14.5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .post-more {
+    margin-top: auto;
+    padding-top: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .post-card:hover .post-more { color: var(--gold-soft); }
+</style>

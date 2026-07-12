@@ -1,0 +1,168 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import PostCard from '../../components/PostCard.astro';
+import VideoCard from '../../components/VideoCard.astro';
+import EmptyPlaylist from '../../components/EmptyPlaylist.astro';
+import { SITE } from '../../config/site';
+
+export async function getStaticPaths() {
+  const topics = await getCollection('topics');
+  return topics.map((topic) => ({ params: { slug: topic.id }, props: { topic } }));
+}
+
+const { topic } = Astro.props;
+const { title, tagline, description, color, playlistUrl, videos } = topic.data;
+
+const allTopics = (await getCollection('topics')).sort((a, b) => a.data.order - b.data.order);
+const posts = (
+  await getCollection('posts', ({ data }) => !data.draft && data.topic.id === topic.id)
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const ills = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/illustrations/*.{png,jpg,jpeg,webp}',
+  { eager: true }
+);
+const img = Object.entries(ills).find(([p]) => p.includes(`/${topic.data.illustration}.`))?.[1]
+  .default;
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="topic-hero" style={`--tc:${color}`}>
+    <div class="wrap">
+      <nav class="topic-switch" aria-label="Chuyển chủ đề" data-reveal>
+        {
+          allTopics.map((t) => (
+            <a
+              class:list={['chip', { 'is-active': t.id === topic.id }]}
+              style={`--chip-color:${t.data.color}`}
+              href={`/chu-de/${t.id}/`}
+              aria-current={t.id === topic.id ? 'page' : undefined}
+            >
+              {t.data.title}
+            </a>
+          ))
+        }
+      </nav>
+
+      <div class="topic-hero-grid">
+        <div data-reveal>
+          <p class="eyebrow">Chủ đề · Playlist YouTube</p>
+          <h1>{title}</h1>
+          <p class="topic-tagline">{tagline}</p>
+          <p class="lead">{description}</p>
+          <div class="topic-actions">
+            {
+              playlistUrl ? (
+                <a class="btn" href={playlistUrl} target="_blank" rel="noopener noreferrer">
+                  Xem playlist trên YouTube
+                </a>
+              ) : (
+                <a class="btn" href={SITE.channelUrl} target="_blank" rel="noopener noreferrer">
+                  Ghé kênh YouTube
+                </a>
+              )
+            }
+            <a class="btn btn--ghost" href="#bai-viet">Đọc bài viết</a>
+          </div>
+        </div>
+        <div class="topic-hero-media" aria-hidden="true" data-reveal>
+          {img && <Image src={img} alt="" width={760} loading="eager" />}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="video">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="Xem nhanh"
+        title="Video của chủ đề này"
+        lead={videos.length === 0 ? undefined : 'Bấm vào video để mở trên YouTube.'}
+      />
+      {
+        videos.length > 0 ? (
+          <div class="grid grid--3">
+            {videos.map((v) => (
+              <div data-reveal>
+                <VideoCard id={v.id} title={v.title} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <EmptyPlaylist topicTitle={title} />
+        )
+      }
+    </div>
+  </section>
+
+  <section class="section section--tint" id="bai-viet">
+    <div class="wrap">
+      <SectionHead eyebrow="Đào sâu" title="Bài viết thuộc chủ đề" />
+      {
+        posts.length > 0 ? (
+          <div class="grid grid--3">
+            {posts.map((p) => (
+              <div data-reveal>
+                <PostCard post={p} topicTitle={title} topicColor={color} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p class="lead">Bài viết đầu tiên của chủ đề này đang được soạn — quay lại sau nhé.</p>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .topic-hero {
+    position: relative;
+    padding-block: 64px 56px;
+    border-bottom: 1px solid var(--border);
+    background:
+      radial-gradient(70% 120% at 85% 0%, color-mix(in srgb, var(--tc) 10%, transparent), transparent 60%),
+      var(--bg);
+  }
+  .topic-switch {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 44px;
+  }
+  .topic-hero-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 48px;
+    align-items: center;
+  }
+  h1 {
+    font-size: clamp(36px, 5.4vw, 60px);
+    margin: 16px 0 6px;
+  }
+  .topic-tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(17px, 2.2vw, 21px);
+    color: var(--tc, var(--gold));
+    margin-bottom: 16px;
+  }
+  .topic-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+  .topic-hero-media :global(img) {
+    border-radius: var(--radius-card);
+    border: 1px solid var(--border);
+  }
+  @media (max-width: 900px) {
+    .topic-hero-grid { grid-template-columns: 1fr; }
+    .topic-hero-media { max-width: 420px; }
+  }
+</style>

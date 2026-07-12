@@ -1,0 +1,188 @@
+---
+import { getCollection } from 'astro:content';
+import type { ImageMetadata } from 'astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero3D from '../components/Hero3D.astro';
+import SectionHead from '../components/SectionHead.astro';
+import TopicCard from '../components/TopicCard.astro';
+import PostCard from '../components/PostCard.astro';
+import { SITE } from '../config/site';
+
+const topics = (await getCollection('topics')).sort((a, b) => a.data.order - b.data.order);
+const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const latest = posts.slice(0, 3);
+
+const postCount: Record<string, number> = {};
+for (const p of posts) postCount[p.data.topic.id] = (postCount[p.data.topic.id] ?? 0) + 1;
+
+const topicById = new Map(topics.map((t) => [t.id, t]));
+
+/* Ảnh minh họa từ hermes — nếu chưa gen thì component tự fallback SVG/gradient */
+const ills = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/illustrations/*.{png,jpg,jpeg,webp}',
+  { eager: true }
+);
+const ill = (name: string): ImageMetadata | undefined => {
+  const hit = Object.entries(ills).find(([path]) => path.includes(`/${name}.`));
+  return hit?.[1].default;
+};
+
+let ogUrl: string | undefined;
+const ogMeta = ill('og');
+if (ogMeta) {
+  const { getImage } = await import('astro:assets');
+  ogUrl = (await getImage({ src: ogMeta, width: 1200, format: 'png' })).src;
+}
+
+const principles = [
+  {
+    n: '01',
+    title: 'Số thật, không lý thuyết suông',
+    text: 'Mọi video và bài viết xuất phát từ bảng số liệu thật mà mình đang vận hành cho chính gia đình — không phải ví dụ chép từ sách.',
+  },
+  {
+    n: '02',
+    title: 'Từng bước nhỏ, đều đặn',
+    text: 'Không có cú xoay chuyển 30 ngày. Chỉ có hệ thống nhỏ chạy bền: mỗi video kết thúc bằng một việc bạn làm được ngay trong tuần.',
+  },
+  {
+    n: '03',
+    title: 'Công cụ tự làm được',
+    text: 'Template, checklist, dashboard trong kênh đều tự dựng được — miễn phí, dữ liệu thuộc về bạn, không lệ thuộc app trả phí.',
+  },
+];
+---
+
+<BaseLayout title={SITE.name} ogImage={ogUrl}>
+  <Hero3D poster={ill('hero')} />
+
+  <section class="section" id="chu-de">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="Kho kiến thức"
+        title="Tra cứu theo chủ đề"
+        lead="Mỗi chủ đề là một playlist trên YouTube: xem video, đọc bài viết đào sâu, tải công cụ đi kèm."
+        link={{ href: '/chu-de/', label: 'Tất cả chủ đề' }}
+      />
+      <div class="grid grid--3 topics-grid">
+        {
+          topics.map((t, i) => (
+            <div class:list={['topic-cell', { 'topic-cell--wide': i === 0 }]} data-reveal>
+              <TopicCard topic={t} img={ill(t.data.illustration)} postCount={postCount[t.id] ?? 0} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="Mới trên blog"
+        title="Bài viết mới nhất"
+        link={{ href: '/bai-viet/', label: 'Tất cả bài viết' }}
+      />
+      <div class="grid grid--3">
+        {
+          latest.map((p) => {
+            const t = topicById.get(p.data.topic.id);
+            return (
+              <div data-reveal>
+                <PostCard post={p} topicTitle={t?.data.title ?? ''} topicColor={t?.data.color ?? '#d4af37'} />
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <SectionHead eyebrow="Cách kênh này làm nội dung" title="Ba nguyên tắc không đổi" />
+      <div class="grid grid--3">
+        {
+          principles.map((p) => (
+            <div class="card principle" data-reveal>
+              <span class="principle-n">{p.n}</span>
+              <h3>{p.title}</h3>
+              <p>{p.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cta-final card" data-reveal>
+        <div>
+          <p class="eyebrow">Đồng hành mỗi tuần</p>
+          <h2>Mỗi tuần một video.<br />Mỗi video một việc làm được ngay.</h2>
+          <p class="lead">
+            Đăng ký kênh để không lỡ video mới — hoặc theo dõi blog qua RSS nếu bạn thích đọc hơn xem.
+          </p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn" href={SITE.channelUrl} target="_blank" rel="noopener noreferrer">Đăng ký {SITE.channelHandle}</a>
+          <a class="btn btn--ghost" href="/rss.xml">Theo dõi qua RSS</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .topics-grid { align-items: stretch; }
+  .topic-cell { min-height: 100%; }
+  .topic-cell :global(.topic-card) { height: 100%; }
+
+  .principle {
+    padding: 30px 28px 34px;
+    position: relative;
+  }
+  .principle-n {
+    display: block;
+    font: 700 15px/1 var(--font-display);
+    color: var(--gold);
+    letter-spacing: 0.14em;
+    margin-bottom: 40px;
+  }
+  .principle-n::after {
+    content: '';
+    display: block;
+    width: 34px;
+    height: 1px;
+    background: var(--gold-deep);
+    margin-top: 12px;
+  }
+  .principle h3 { font-size: 21px; }
+  .principle p { color: var(--muted); font-size: 14.5px; margin: 0; }
+
+  .cta-final {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: clamp(34px, 5vw, 60px);
+    background:
+      radial-gradient(90% 140% at 100% 0%, rgba(212, 175, 55, 0.09), transparent 55%),
+      var(--surface);
+  }
+  .cta-final h2 { font-size: clamp(26px, 3.6vw, 38px); margin: 14px 0 12px; }
+  .cta-final .lead { margin: 0; }
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  @media (max-width: 820px) {
+    .cta-final { flex-direction: column; align-items: flex-start; }
+    .cta-actions { flex-direction: row; flex-wrap: wrap; }
+  }
+</style>

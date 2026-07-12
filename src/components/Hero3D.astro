@@ -1,0 +1,168 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { SITE } from '../config/site';
+
+interface Props {
+  poster?: ImageMetadata | undefined;
+}
+const { poster } = Astro.props;
+---
+
+<section class="hero" id="hero">
+  <div class="hero-bg" aria-hidden="true">
+    {
+      poster && (
+        <Image
+          class="hero-poster"
+          src={poster}
+          alt=""
+          width={1600}
+          loading="eager"
+          fetchpriority="high"
+        />
+      )
+    }
+    <canvas class="hero-canvas" id="hero-canvas"></canvas>
+    <div class="hero-vignette"></div>
+  </div>
+
+  <div class="wrap hero-inner">
+    <p class="eyebrow" data-reveal>Kênh YouTube · Blog tài chính cá nhân</p>
+    <h1 class="hero-title" data-reveal>
+      Hiểu tiền —<br /><em>từng đồng, từng bước.</em>
+    </h1>
+    <p class="lead" data-reveal>
+      Quản lý chi tiêu, tiết kiệm, đầu tư cho người mới và tài chính gia đình —
+      kể bằng trải nghiệm thật, số liệu thật. Mỗi chủ đề là một playlist.
+    </p>
+    <div class="hero-cta" data-reveal>
+      <a class="btn" href={SITE.channelUrl} target="_blank" rel="noopener noreferrer">Đăng ký kênh YouTube</a>
+      <a class="btn btn--ghost" href="#chu-de">Khám phá chủ đề</a>
+    </div>
+    <ul class="hero-stats" data-reveal>
+      <li><strong>5</strong><span>chủ đề = 5 playlist</span></li>
+      <li><strong>1 tuần</strong><span>một video mới</span></li>
+      <li><strong>100%</strong><span>tiếng Việt, số thật</span></li>
+    </ul>
+  </div>
+
+  <a class="hero-scroll" href="#chu-de" aria-label="Cuộn xuống xem chủ đề">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v14m0 0l-6-6m6 6l6-6"/></svg>
+  </a>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: min(92vh, 900px);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-bg { position: absolute; inset: 0; }
+  .hero-bg :global(.hero-poster) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.38;
+  }
+  .hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+  .hero-canvas.is-live { opacity: 1; }
+  .hero-vignette {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(90% 70% at 30% 45%, transparent, rgba(5, 7, 13, 0.55) 70%, rgba(5, 7, 13, 0.92)),
+      linear-gradient(180deg, rgba(5, 7, 13, 0.25), transparent 30%, transparent 60%, var(--bg));
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    padding-block: 120px 90px;
+    max-width: var(--wrap);
+  }
+  .hero-title {
+    font-size: clamp(42px, 7.2vw, 82px);
+    line-height: 1.04;
+    margin: 22px 0 20px;
+    max-width: 14ch;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-cta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 34px;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 42px;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 52px 0 0;
+    padding: 0;
+  }
+  .hero-stats li {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .hero-stats strong {
+    font-family: var(--font-display);
+    font-size: 26px;
+    color: var(--gold-soft);
+  }
+  .hero-stats span {
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    color: var(--muted-soft);
+    text-transform: uppercase;
+  }
+  .hero-scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 26px;
+    transform: translateX(-50%);
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--border-strong);
+    border-radius: 50%;
+    color: var(--muted);
+    animation: hero-bob 2.6s ease-in-out infinite;
+  }
+  .hero-scroll svg { width: 18px; height: 18px; }
+  .hero-scroll:hover { color: var(--gold); border-color: var(--gold); }
+  @keyframes hero-bob {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(7px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-scroll { animation: none; }
+  }
+  @media (max-width: 640px) {
+    .hero-inner { padding-block: 90px 80px; }
+    .hero-stats { gap: 26px; }
+  }
+</style>
+
+<script>
+  import { maybeInitHero } from '../scripts/hero-scene';
+  maybeInitHero(document.getElementById('hero-canvas') as HTMLCanvasElement | null);
+</script>
