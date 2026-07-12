@@ -26,10 +26,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Configure Pages (tự bật Pages nếu chưa bật)
+      - name: Configure Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - name: Build Astro
         uses: withastro/action@v3
         with:
