@@ -7,7 +7,7 @@ pubDate: 2026-07-13
 
 Thẻ tín dụng giúp thanh toán thuận tiện và gom giao dịch vào một bản sao kê. Rắc rối thường bắt đầu khi mình xem hạn mức như tiền đang có, hoặc chỉ nhìn khoản thanh toán tối thiểu mà bỏ qua toàn bộ dư nợ.
 
-Không cần sợ chiếc thẻ, nhưng cần hiểu luật vận hành của nó. Một quy trình ngắn sau mỗi kỳ sẽ giúp mình biết đã tiêu gì, phải trả bao nhiêu và khi nào tiền cần có sẵn.
+Cần hiểu luật vận hành của thẻ. Một quy trình ngắn sau mỗi kỳ giúp mình biết đã tiêu gì, phải trả bao nhiêu và khi nào tiền cần có sẵn.
 
 ## Phân biệt ngày sao kê và ngày đến hạn
 
