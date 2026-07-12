@@ -14,6 +14,7 @@
 - Thêm bài **Nuôi con theo từng giai đoạn, lập quỹ giáo dục từ sớm** (`nuoi-con-theo-giai-doan-va-quy-giao-duc`).
 - Thêm bài **Hỗ trợ cha mẹ trong ngân sách gia đình: chủ động để cùng nhẹ lòng** (`ho-tro-cha-me-trong-ngan-sach-gia-dinh`).
 - Thêm bài **Chậm một nhịp trước lừa đảo tài chính** (`cham-mot-nhip-truoc-lua-dao-tai-chinh`).
+- Ảnh minh họa `topic-tai-chinh-doi-thuc.png` (hoa sen vàng + lá emerald, gpt-image-2 qua container hermes) + icon fallback hoa sen trong `TopicCard.astro` + job regenerate trong `tools/gen-images.mjs`.
 
 ## [0.1.3] — 2026-07-13
 
