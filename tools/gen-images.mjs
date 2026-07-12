@@ -65,6 +65,12 @@ const JOBS = [
     prompt: `An elegant dark credit card with golden edges resting beside a small golden balance scale, calm and trustworthy mood. ${STYLE}`,
   },
   {
+    name: 'topic-bao-hiem-thue-huu-tri',
+    aspect: '1:1',
+    model: 'gpt-image-2-low',
+    prompt: `A golden umbrella sheltering a neat stack of golden coins, beside an elegant golden hourglass with emerald glass sand, calm protective mood. ${STYLE}`,
+  },
+  {
     name: 'og',
     aspect: '16:9',
     model: 'gpt-image-2-medium',
