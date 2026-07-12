@@ -12,6 +12,7 @@
 - Thêm chủ đề **Bảo hiểm – Thuế – Hưu trí** (`bao-hiem-thue-huu-tri`) — lớp phòng vệ hiện tại và kế hoạch tài chính dài hạn.
 - Thêm bài **Ưu tiên bảo hiểm cho gia đình: bảo vệ điều quan trọng trước** (`uu-tien-bao-hiem-cho-gia-dinh`).
 - Thêm bài **Chuẩn bị hưu trí từ tuổi 30: thời gian quan trọng hơn khởi đầu lớn** (`chuan-bi-huu-tri-tu-tuoi-30`).
+- Ảnh minh họa `topic-bao-hiem-thue-huu-tri.png` (ô dù + đồng hồ cát, gpt-image-2 qua container hermes) + icon fallback ô dù trong `TopicCard.astro` + job regenerate trong `tools/gen-images.mjs`.
 
 ## [0.1.2] — 2026-07-13
 
