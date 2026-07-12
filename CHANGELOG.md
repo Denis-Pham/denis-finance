@@ -7,6 +7,13 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.1.2] — 2026-07-13
+
+- Thêm chủ đề **Nợ & Tín dụng** (`no-va-tin-dung`) — chủ đề thứ 6, theo đề xuất taxonomy của Hermes.
+- Thêm bài **Ba câu hỏi trước khi vay: nhìn rõ khoản nợ trước khi ký** (`ba-cau-hoi-truoc-khi-vay`).
+- Thêm bài **Dùng thẻ tín dụng không rơi vào bẫy: đọc sao kê, trả đúng hạn** (`dung-the-tin-dung-khong-roi-vao-bay`).
+- Ảnh minh họa `topic-no-va-tin-dung.png` (gpt-image-2 qua container hermes) + icon fallback thẻ tín dụng trong `TopicCard.astro` + job regenerate trong `tools/gen-images.mjs`.
+
 ## [0.1.1] — 2026-07-12
 
 Bổ sung 2 bài viết thực hành:
