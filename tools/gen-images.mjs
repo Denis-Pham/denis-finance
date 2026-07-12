@@ -59,6 +59,12 @@ const JOBS = [
     prompt: `An elegant golden compass with an emerald needle resting on dark marble. ${STYLE}`,
   },
   {
+    name: 'topic-no-va-tin-dung',
+    aspect: '1:1',
+    model: 'gpt-image-2-low',
+    prompt: `An elegant dark credit card with golden edges resting beside a small golden balance scale, calm and trustworthy mood. ${STYLE}`,
+  },
+  {
     name: 'og',
     aspect: '16:9',
     model: 'gpt-image-2-medium',
