@@ -7,6 +7,13 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.1.1] — 2026-07-12
+
+Bổ sung 2 bài viết thực hành:
+
+- **Tự động tiết kiệm ngày nhận lương: trả cho mình trước** — cách chọn tỉ lệ tiết kiệm, chia tài khoản và duy trì lệnh chuyển khi thu nhập biến động.
+- **Phân vai vợ chồng khi quản lý tiền chung: rõ việc, không giấu số** — mô hình “một người làm, hai người thấy” với trách nhiệm và quyền quyết định rõ ràng.
+
 ## [0.1.0] — 2026-07-12
 
 Khởi tạo site (Claude Code + Hermes):
