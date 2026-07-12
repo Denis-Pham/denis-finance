@@ -7,6 +7,14 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.2.0] — 2026-07-12
+
+Nâng cấp 3D theo yêu cầu Denis (trước đây chỉ hero có 3D):
+
+- **Lớp 3D ambient toàn trang** (`src/scripts/ambient-scene.ts` + canvas trong `BaseLayout.astro`): coin vàng + bụi ánh kim trôi sau nội dung ở MỌI trang, parallax theo scroll (mỗi coin một tốc độ, wrap dọc vô tận). Trang bài viết dùng biến thể mờ (`ambient="dim"`) để dễ đọc. Desktop pointer-fine ≥900px; tự tắt khi reduced-motion/không WebGL; pause khi tab ẩn; hero che ambient bằng nền đặc (hero có scene riêng dày hơn).
+- **Con trỏ chuột = đồng xu vàng 3D** (`initCoinCursor` trong `fx.ts` + CSS `.coin-cursor`): xoay rotateY liên tục, phóng to khi hover link/nút/card, thu nhỏ khi click; chỉ desktop, không áp cho touch/reduced-motion.
+- Reveal khi cuộn thêm lật nhẹ `rotationX` (cảm giác chiều sâu ở mọi section).
+
 ## [0.1.4] — 2026-07-14
 
 - Thêm chủ đề **Tài chính đời thực** (`tai-chinh-doi-thuc`) — điều chỉnh công thức tiền bạc theo những hoàn cảnh sống rất Việt Nam.

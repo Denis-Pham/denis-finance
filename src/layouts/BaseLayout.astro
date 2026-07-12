@@ -15,9 +15,11 @@ interface Props {
   description?: string;
   ogImage?: string | undefined;
   article?: boolean;
+  /** Lớp 3D ambient toàn trang: 'dim' cho trang đọc dài (bài viết) */
+  ambient?: 'normal' | 'dim';
 }
 
-const { title, description = SITE.description, ogImage, article = false } = Astro.props;
+const { title, description = SITE.description, ogImage, article = false, ambient = 'normal' } = Astro.props;
 const site = Astro.site ?? new URL(SITE.url);
 const canonical = new URL(Astro.url.pathname, site);
 const fullTitle = title === SITE.name ? `${SITE.name} — ${SITE.tagline}` : `${title} — ${SITE.name}`;
@@ -66,6 +68,10 @@ const websiteLd = JSON.stringify({
   </head>
   <body>
     <a class="skip-link" href="#main">Bỏ qua điều hướng</a>
+    <canvas
+      id="ambient-canvas"
+      class:list={['ambient-canvas', { 'ambient-canvas--dim': ambient === 'dim' }]}
+      aria-hidden="true"></canvas>
     <Header />
     <main id="main">
       <slot />
@@ -73,6 +79,8 @@ const websiteLd = JSON.stringify({
     <Footer />
     <script>
       import '../scripts/fx';
+      import { maybeInitAmbient } from '../scripts/ambient-scene';
+      maybeInitAmbient(document.getElementById('ambient-canvas') as HTMLCanvasElement | null);
     </script>
   </body>
 </html>

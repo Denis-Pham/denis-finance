@@ -42,7 +42,7 @@ const articleLd = JSON.stringify({
 });
 ---
 
-<BaseLayout title={title} description={description} article>
+<BaseLayout title={title} description={description} article ambient="dim">
   <script type="application/ld+json" set:html={articleLd} slot="head" />
 
   <article class="section post-article">

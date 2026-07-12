@@ -12,6 +12,7 @@ if (!reduced) {
   initScroll();
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     initTilt();
+    initCoinCursor();
   }
 }
 
@@ -35,16 +36,49 @@ function initScroll(): void {
     });
   });
 
-  // Reveal khi cuộn tới
+  // Reveal khi cuộn tới — kèm lật 3D nhẹ (rotationX) cho cảm giác chiều sâu
   document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => {
     gsap.from(el, {
       y: 26,
+      rotationX: 7,
+      transformPerspective: 700,
+      transformOrigin: '50% 0%',
       autoAlpha: 0,
       duration: 0.9,
       ease: 'power3.out',
       scrollTrigger: { trigger: el, start: 'top 88%', once: true },
     });
   });
+}
+
+/**
+ * Con trỏ chuột = đồng xu vàng quay 3D. Chỉ desktop pointer-fine,
+ * không reduced-motion (guard ở nơi gọi). Phóng to khi hover link/nút.
+ */
+function initCoinCursor(): void {
+  const el = document.createElement('div');
+  el.className = 'coin-cursor';
+  el.innerHTML = '<span class="coin-cursor-scale"><span class="coin-cursor-face"></span></span>';
+  document.body.appendChild(el);
+  document.documentElement.classList.add('coin-cursor-on');
+
+  window.addEventListener(
+    'pointermove',
+    (e) => {
+      el.style.opacity = '1';
+      el.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+    },
+    { passive: true }
+  );
+  document.documentElement.addEventListener('mouseleave', () => {
+    el.style.opacity = '0';
+  });
+  document.addEventListener('mouseover', (e) => {
+    const target = e.target as HTMLElement | null;
+    el.classList.toggle('is-link', !!target?.closest('a, button, [data-tilt], summary'));
+  });
+  window.addEventListener('pointerdown', () => el.classList.add('is-down'));
+  window.addEventListener('pointerup', () => el.classList.remove('is-down'));
 }
 
 function initTilt(): void {

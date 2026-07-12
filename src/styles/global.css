@@ -207,10 +207,77 @@ a.chip:hover, .chip.is-active { border-color: var(--gold); color: var(--fg); }
   .wrap { padding: 0 20px; }
 }
 
+/* ---------- Lớp 3D ambient toàn trang ---------- */
+.ambient-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 1.6s ease;
+  pointer-events: none;
+}
+.ambient-canvas.is-live { opacity: 0.55; }
+.ambient-canvas--dim.is-live { opacity: 0.22; }
+
+/* Nội dung nổi trên canvas ambient; section bg trong suốt để coin lộ ra */
+main, .site-footer { position: relative; z-index: 1; }
+
+/* ---------- Con trỏ đồng xu (desktop, pointer fine) ---------- */
+html.coin-cursor-on,
+html.coin-cursor-on * { cursor: none !important; }
+
+.coin-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  will-change: transform;
+}
+.coin-cursor-scale {
+  position: absolute;
+  left: -11px;
+  top: -11px;
+  width: 22px;
+  height: 22px;
+  perspective: 220px;
+  transition: transform 0.18s ease;
+}
+.coin-cursor.is-link .coin-cursor-scale { transform: scale(1.6); }
+.coin-cursor.is-down .coin-cursor-scale { transform: scale(0.78); }
+.coin-cursor-face {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, #f8e9b8 0%, #e5c65e 38%, #d4af37 62%, #8a6d1c 100%);
+  box-shadow:
+    inset 0 0 0 1.5px rgba(255, 244, 200, 0.5),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.35),
+    0 0 14px rgba(212, 175, 55, 0.45);
+  animation: coin-spin 3s linear infinite;
+}
+.coin-cursor.is-link .coin-cursor-face {
+  animation-duration: 1.1s;
+  box-shadow:
+    inset 0 0 0 1.5px rgba(255, 244, 200, 0.65),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.35),
+    0 0 22px rgba(212, 175, 55, 0.7);
+}
+@keyframes coin-spin {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.001s !important;
     transition-duration: 0.001s !important;
   }
+  .ambient-canvas { display: none; }
 }
