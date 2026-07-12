@@ -1,0 +1,12 @@
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    image: denis-finance:latest
+    container_name: denis-finance
+    # Bind localhost-only — mở public qua reverse proxy (nginx/caddy) + HTTPS.
+    # Muốn expose thẳng (không khuyến khích): đổi thành "8688:80".
+    ports:
+      - "127.0.0.1:8688:80"
+    restart: unless-stopped
