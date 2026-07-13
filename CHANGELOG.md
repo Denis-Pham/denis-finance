@@ -7,6 +7,13 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.2.2] — 2026-07-15
+
+- Thêm bài **Nhiều khoản nợ cùng lúc: chọn snowball hay avalanche?** (`chon-snowball-hay-avalanche-khi-co-nhieu-khoan-no`).
+- Thêm bài **Trả nợ trước hạn: khi nào đáng, khi nào chưa?** (`tra-no-truoc-han-khi-nao-dang`).
+- Thêm bài **Quyết toán thuế thu nhập cá nhân không hoảng loạn** (`quyet-toan-thue-thu-nhap-ca-nhan-khong-hoang-loan`).
+- Thêm bài **Đọc hợp đồng bảo hiểm trong 30 phút: checklist trước khi ký** (`doc-hop-dong-bao-hiem-trong-30-phut`).
+
 ## [0.2.1] — 2026-07-12
 
 Deploy GitHub Pages (https://denis-pham.github.io/denis-finance/):
