@@ -7,6 +7,13 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.2.4] — 2026-07-17
+
+- Thêm bài **Kiểm toán chi tiêu: săn phí ẩn và thuê bao quên huỷ** (`kiem-toan-chi-tieu-san-phi-an-thue-bao`).
+- Thêm bài **Quỹ chìm: để dành trước cho những khoản biết trước** (`quy-chim-de-danh-cho-khoan-biet-truoc`).
+- Thêm bài **5 sai lầm kinh điển của người mới đầu tư** (`5-sai-lam-nguoi-moi-dau-tu`).
+- Thêm bài **Dạy con hiểu tiền theo từng độ tuổi** (`day-con-hieu-tien-theo-tung-do-tuoi`).
+
 ## [0.2.3] — 2026-07-16
 
 - Thêm bài **Năm lối tắt tâm lý khiến mình tiêu nhiều hơn dự định** (`loi-tat-tam-ly-khien-ta-tieu-nhieu-hon`).
