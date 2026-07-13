@@ -1,4 +1,4 @@
-# Denis Finance — Landing page blog cho kênh YouTube tài chính
+# Ví Nhà Mình — Landing page blog cho kênh YouTube tài chính
 
 Website tĩnh (Astro 5) dạng blog **tra cứu theo chủ đề** — mỗi chủ đề map một playlist YouTube.
 Hero 3D (Three.js), cuộn mượt + reveal (GSAP/Lenis), hình minh họa tạo bằng Hermes (gpt-image-2).
@@ -61,9 +61,9 @@ tự build và deploy lên **https://denis-pham.github.io/denis-finance/**.
 
 ## Tuỳ biến
 
-### Đổi brand / tên kênh (PLACEHOLDER hiện tại: "Denis Finance")
+### Đổi brand / tên kênh (hiện tại: "Ví Nhà Mình", chốt 2026-07-13)
 
-1. `src/config/site.ts` — tên, tagline, mô tả, **URL kênh YouTube thật**.
+1. `src/config/site.ts` — tên, tagline, mô tả, **URL kênh YouTube thật** (handle @ViNhaMinh cần xác nhận khi tạo kênh).
 2. `astro.config.mjs` — `site:` domain thật (cho canonical/OG/sitemap/RSS).
 3. `public/robots.txt` — sửa URL sitemap theo domain.
 

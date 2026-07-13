@@ -7,6 +7,15 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.3.0] — 2026-07-13
+
+**Chốt tên kênh: Ví Nhà Mình** (một trong 3 gợi ý của Hermes, Denis quyết):
+
+- `src/config/site.ts`: name "Ví Nhà Mình", shortName "VNM", channel handle dự kiến `@ViNhaMinh` (CHỜ XÁC NHẬN khi tạo kênh YouTube thật — trùng handle thì đổi lại tại đây), description thêm "tài chính gia đình" + câu brand "Tiền là chuyện của cả nhà."
+- Favicon `D` → `V`. README cập nhật brand.
+- Còn placeholder: domain (`astro.config.mjs` + `robots.txt`), `playlistUrl`/`videos` trong topics.
+- Repo/URL giữ nguyên `denis-finance` (đổi tên repo sẽ gãy Pages URL + remotes + kanban — brand site không cần trùng tên repo).
+
 ## [0.2.4] — 2026-07-17
 
 - Thêm bài **Kiểm toán chi tiêu: săn phí ẩn và thuê bao quên huỷ** (`kiem-toan-chi-tieu-san-phi-an-thue-bao`).

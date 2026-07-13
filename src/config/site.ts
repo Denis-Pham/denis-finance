@@ -1,6 +1,8 @@
 /**
  * Cấu hình brand — ĐỔI Ở ĐÂY LÀ ĐỔI TOÀN SITE.
- * TODO(Denis): thay tên kênh, handle và channelUrl bằng kênh thật.
+ * Tên kênh "Ví Nhà Mình" — Denis chốt 2026-07-13.
+ * TODO(Denis): xác nhận handle @ViNhaMinh khi tạo kênh YouTube thật
+ * (nếu handle bị trùng phải đổi channelUrl + channelHandle ở đây).
  */
 /**
  * Prefix base path cho link nội bộ — cần cho GitHub Pages (subpath /denis-finance).
@@ -13,14 +15,14 @@ export function withBase(path: string): string {
 }
 
 export const SITE = {
-  name: 'Denis Finance',
-  shortName: 'DF',
+  name: 'Ví Nhà Mình',
+  shortName: 'VNM',
   tagline: 'Hiểu tiền — từng đồng, từng bước',
   description:
-    'Blog và kênh YouTube về tài chính cá nhân thực chiến: quản lý chi tiêu, tiết kiệm, đầu tư cho người mới và tài chính gia đình — kể bằng trải nghiệm thật, số liệu thật.',
+    'Blog và kênh YouTube về tài chính cá nhân, tài chính gia đình thực chiến: quản lý chi tiêu, tiết kiệm, đầu tư cho người mới — kể bằng trải nghiệm thật, số liệu thật. Tiền là chuyện của cả nhà.',
   url: 'https://denis-finance.example.com',
-  channelUrl: 'https://www.youtube.com/@DenisFinance',
-  channelHandle: '@DenisFinance',
+  channelUrl: 'https://www.youtube.com/@ViNhaMinh',
+  channelHandle: '@ViNhaMinh',
   author: 'Denis Phạm',
   locale: 'vi',
 } as const;
