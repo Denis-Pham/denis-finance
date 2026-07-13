@@ -7,6 +7,11 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.2.3] — 2026-07-16
+
+- Thêm bài **Năm lối tắt tâm lý khiến mình tiêu nhiều hơn dự định** (`loi-tat-tam-ly-khien-ta-tieu-nhieu-hon`).
+- Thêm bài **Lạm phát lối sống: tăng lương rồi vẫn hết tiền** (`lam-phat-loi-song-tang-luong-van-het-tien`).
+
 ## [0.2.2] — 2026-07-15
 
 - Thêm bài **Nhiều khoản nợ cùng lúc: chọn snowball hay avalanche?** (`chon-snowball-hay-avalanche-khi-co-nhieu-khoan-no`).
