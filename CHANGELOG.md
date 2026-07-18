@@ -7,6 +7,16 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.3.1] — 2026-07-18
+
+**Kết nối kênh YouTube thật (Ví Nhà Mình TV đã lên sóng 17/7):**
+
+- `src/config/site.ts`: handle thật **@vinhaminhtv** (xác nhận qua YouTube API `channels.list` customUrl — KHÁC dự kiến `@ViNhaMinh` cũ); channelUrl cập nhật theo. Header CTA + footer + JSON-LD tự ăn theo.
+- Topic `tu-duy-tien-bac`: gắn video EP01 `lNTOrJg7pcw` ("Vì sao càng kiếm nhiều tiền vẫn càng thấy thiếu?" — PUBLIC 18/7).
+- Topic `quan-ly-chi-tieu` + `tiet-kiem-quy-du-phong`: card "Sắp ra mắt" cho EP02/EP03 (đã hẹn giờ public YouTube: CN 26/7 và CN 2/8, 20:00) — điền id thật sau khi public: EP02 `Dff44SK5Y7s`, EP03 `F7D5e-4sg0M`.
+- Bài `lam-phat-loi-song-tang-luong-van-het-tien`: thêm `videoId: lNTOrJg7pcw` (VideoCard cuối bài).
+- Còn placeholder: domain, `playlistUrl` (kênh chưa tạo playlist).
+
 ## [0.3.0] — 2026-07-13
 
 **Chốt tên kênh: Ví Nhà Mình** (một trong 3 gợi ý của Hermes, Denis quyết):

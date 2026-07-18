@@ -3,6 +3,7 @@ title: "Lạm phát lối sống: tăng lương rồi vẫn hết tiền"
 description: "Vì sao mức chi thường tự nở theo thu nhập, cách phân biệt nâng chất lượng sống với nâng cấp vô thức và ba chốt chặn thực tế."
 topic: tu-duy-tien-bac
 pubDate: 2026-07-16
+videoId: lNTOrJg7pcw
 ---
 
 Tăng lương đáng lẽ phải tạo thêm khoảng thở. Nhưng vài tháng sau, tài khoản cuối tháng lại gần như cũ: quán ăn tốt hơn, chuyến xe tiện hơn, gói thuê bao nhiều hơn và một món đồ trả góp mới. Đây thường được gọi là **lạm phát lối sống** — mức chi tự nở ra khi thu nhập tăng.

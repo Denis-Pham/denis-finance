@@ -5,6 +5,8 @@
   "order": 5,
   "color": "#f0dfa8",
   "playlistUrl": "",
-  "videos": [],
+  "videos": [
+    { "id": "lNTOrJg7pcw", "title": "Vì sao càng kiếm nhiều tiền vẫn càng thấy thiếu?" }
+  ],
   "illustration": "topic-tu-duy-tien-bac"
 }

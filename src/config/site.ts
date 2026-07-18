@@ -1,8 +1,8 @@
 /**
  * Cấu hình brand — ĐỔI Ở ĐÂY LÀ ĐỔI TOÀN SITE.
  * Tên kênh "Ví Nhà Mình" — Denis chốt 2026-07-13.
- * TODO(Denis): xác nhận handle @ViNhaMinh khi tạo kênh YouTube thật
- * (nếu handle bị trùng phải đổi channelUrl + channelHandle ở đây).
+ * Kênh thật "Ví Nhà Mình TV" đã lên sóng 2026-07-17; handle thật @vinhaminhtv
+ * (xác nhận qua YouTube API channels.list customUrl, 2026-07-18).
  */
 /**
  * Prefix base path cho link nội bộ — cần cho GitHub Pages (subpath /denis-finance).
@@ -21,8 +21,8 @@ export const SITE = {
   description:
     'Blog và kênh YouTube về tài chính cá nhân, tài chính gia đình thực chiến: quản lý chi tiêu, tiết kiệm, đầu tư cho người mới — kể bằng trải nghiệm thật, số liệu thật. Tiền là chuyện của cả nhà.',
   url: 'https://denis-finance.example.com',
-  channelUrl: 'https://www.youtube.com/@ViNhaMinh',
-  channelHandle: '@ViNhaMinh',
+  channelUrl: 'https://www.youtube.com/@vinhaminhtv',
+  channelHandle: '@vinhaminhtv',
   author: 'Denis Phạm',
   locale: 'vi',
 } as const;

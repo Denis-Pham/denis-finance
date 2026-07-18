@@ -5,6 +5,8 @@
   "order": 1,
   "color": "#d4af37",
   "playlistUrl": "",
-  "videos": [],
+  "videos": [
+    { "id": "", "title": "Biến mớ chi tiêu lộn xộn thành MỘT con số — cách quản lý tiền cho người lười (20:00 CN 26/7)" }
+  ],
   "illustration": "topic-quan-ly-chi-tieu"
 }
