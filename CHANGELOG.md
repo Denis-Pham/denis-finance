@@ -7,6 +7,15 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.3.3] — 2026-07-19
+
+**Cập nhật lịch publish mới (Denis dời trong Studio 19/7, verify qua YouTube API):**
+
+- Topic `quan-ly-chi-tieu`: EP02 đã PUBLIC → điền id thật `Dff44SK5Y7s`, bỏ ngày khỏi title (pattern giống EP01).
+- Topic `tiet-kiem-quy-du-phong`: EP03 dời CN 2/8 → **thứ Tư 22/7 20:00** (id thật `F7D5e-4sg0M`, điền sau khi public).
+- Topic `no-va-tin-dung`: EP04 dời CN 9/8 → **CN 26/7 20:00** (id thật `zxqrecxw-L0`, điền sau khi public).
+- Lịch tiếp theo: EP05 hẹn thứ Năm 30/7 20:00 — chưa có card trên site (chưa rõ topic), thêm sau.
+
 ## [0.3.2] — 2026-07-19
 
 - Topic `no-va-tin-dung`: card "Sắp ra mắt" cho **EP04 — "Trả nợ trước hay để dành trước? Cách gỡ nợ đúng thứ tự"** (đã upload private 19/7, hẹn giờ public YouTube CN 9/8 20:00) — điền id thật sau khi public: `zxqrecxw-L0`. Pattern y hệt card EP02/EP03 (id rỗng + ngày trong title).
