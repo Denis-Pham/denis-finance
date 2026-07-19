@@ -7,6 +7,10 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.3.2] — 2026-07-19
+
+- Topic `no-va-tin-dung`: card "Sắp ra mắt" cho **EP04 — "Trả nợ trước hay để dành trước? Cách gỡ nợ đúng thứ tự"** (đã upload private 19/7, hẹn giờ public YouTube CN 9/8 20:00) — điền id thật sau khi public: `zxqrecxw-L0`. Pattern y hệt card EP02/EP03 (id rỗng + ngày trong title).
+
 ## [0.3.1] — 2026-07-18
 
 **Kết nối kênh YouTube thật (Ví Nhà Mình TV đã lên sóng 17/7):**
