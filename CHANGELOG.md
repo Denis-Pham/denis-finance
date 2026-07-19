@@ -7,6 +7,12 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.3.6] — 2026-07-19
+
+**1 bài viết mới (Hermes, posts round 5):**
+
+- Thêm bài **Tiền riêng trong hôn nhân: khoản tự do, không phải quỹ đen** (`tien-rieng-minh-bach-trong-hon-nhan`).
+
 ## [0.3.5] — 2026-07-19
 
 **4 bài viết mới (Hermes, posts round 4):**
