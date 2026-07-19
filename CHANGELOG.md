@@ -7,6 +7,11 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.3.8] — 2026-07-19
+
+**Card EP09 + hoàn thiện id EP08 (Denis: "làm luôn card ep09 trên site đi"):**
+
+- Topic `tai-chinh-doi-thuc`: điền id EP08 `qkE8aOOYiDI` (đã upload 19/7, hẹn giờ 8/8) + `upcoming: true`; thêm card **EP09 Tiền chung của hai người: gộp, góp hay chia?** (20:00 thứ Ba 11/8) — id rỗng, điền ngay khi upload xong (đang sản xuất, dự kiến trong ngày).
 ## [0.3.7] — 2026-07-19
 
 **Điền sẵn id thật cho 5 card "Sắp ra mắt" + cờ `upcoming` (Denis: "id có trong YouTube rồi, bỏ vào luôn"):**
