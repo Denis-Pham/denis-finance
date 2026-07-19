@@ -7,6 +7,11 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.3.9] — 2026-07-19
+
+**Điền id EP09 (upload xong trong ngày, đúng lời hẹn 0.3.8):**
+
+- Topic `tai-chinh-doi-thuc`: card EP09 nhận id thật `rIiP4_DW2jo` (private hẹn giờ thứ Ba 11/8 20:00), giữ `upcoming: true` — khi public chỉ cần xoá cờ + bỏ ngày.
 ## [0.3.8] — 2026-07-19
 
 **Card EP09 + hoàn thiện id EP08 (Denis: "làm luôn card ep09 trên site đi"):**
