@@ -7,6 +7,15 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.3.5] — 2026-07-19
+
+**4 bài viết mới (Hermes, posts round 4):**
+
+- Thêm bài **Để quỹ dự phòng ở đâu: dễ rút khi cần, khó tiêu khi thèm** (`de-quy-du-phong-o-dau`).
+- Thêm bài **Lãi kép: bắt đầu sớm quan trọng hơn bắt đầu lớn** (`lai-kep-bat-dau-som-quan-trong-hon-bat-dau-lon`).
+- Thêm bài **Món đồ này giá bao nhiêu giờ làm việc?** (`mon-do-nay-gia-bao-nhieu-gio-lam-viec`).
+- Thêm bài **Ngân sách phong bì thời quét QR** (`ngan-sach-phong-bi-thoi-quet-qr`).
+
 ## [0.3.4] — 2026-07-19
 
 **Card "Sắp ra mắt" cho EP05–EP08 (lịch Denis chốt trong chat 19/7):**
