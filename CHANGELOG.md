@@ -7,6 +7,11 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.3.10] — 2026-07-20
+
+**Card EP10 (Denis: "làm luôn card ep10 trên site đi"):**
+
+- Topic `tai-chinh-doi-thuc`: thêm card **EP10 Dạy con hiểu tiền: việc thật, tiền thật, sai thật** (20:00 thứ Sáu 14/8) — id thật `01gymUu4tkI` (upload 20/7, hẹn giờ) + `upcoming: true`; khi public chỉ xoá cờ + bỏ ngày. Topic này giờ đủ arc ba tập gia đình: EP08 thu nhập · EP09 tiền chung · EP10 dạy con.
 ## [0.3.9] — 2026-07-19
 
 **Điền id EP09 (upload xong trong ngày, đúng lời hẹn 0.3.8):**
