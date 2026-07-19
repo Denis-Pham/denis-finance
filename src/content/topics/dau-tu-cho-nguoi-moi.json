@@ -6,9 +6,9 @@
   "color": "#e0b84f",
   "playlistUrl": "",
   "videos": [
-    { "id": "", "title": "Lãi kép: vì sao bắt đầu sớm thắng bắt đầu to? (20:00 thứ Năm 30/7)" },
-    { "id": "", "title": "Bỏ tiền vào đâu? Rủi ro và lợi nhuận — cái giá của từng chỗ (20:00 CN 2/8)" },
-    { "id": "", "title": "Đa dạng hóa: chia giỏ trứng kiểu gì cho đúng? (20:00 thứ Tư 5/8)" }
+    { "id": "syPlRuNC-EA", "upcoming": true, "title": "Lãi kép: vì sao bắt đầu sớm thắng bắt đầu to? (20:00 thứ Năm 30/7)" },
+    { "id": "HwX1yihRoPE", "upcoming": true, "title": "Bỏ tiền vào đâu? Rủi ro và lợi nhuận — cái giá của từng chỗ (20:00 CN 2/8)" },
+    { "id": "QZzI29LaHvE", "upcoming": true, "title": "Đa dạng hóa: chia giỏ trứng kiểu gì cho đúng? (20:00 thứ Tư 5/8)" }
   ],
   "illustration": "topic-dau-tu-cho-nguoi-moi"
 }

@@ -6,6 +6,8 @@ import { glob } from 'astro/loaders';
  * `playlistUrl` để "" khi playlist chưa tạo → UI hiện EmptyPlaylist + CTA kênh.
  * `videos` là danh sách video của playlist (id YouTube 11 ký tự) — điền tay,
  * id để "" sẽ render card "sắp ra mắt" (không ảnh hỏng).
+ * `upcoming: true` = đã có id (video upload + hẹn giờ) nhưng CHƯA public
+ * → vẫn render card "sắp ra mắt"; đến ngày public chỉ cần xoá cờ + bỏ ngày khỏi title.
  */
 const topics = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/topics' }),
@@ -16,7 +18,9 @@ const topics = defineCollection({
     order: z.number(),
     color: z.string(),
     playlistUrl: z.string().default(''),
-    videos: z.array(z.object({ id: z.string(), title: z.string() })).default([]),
+    videos: z
+      .array(z.object({ id: z.string(), title: z.string(), upcoming: z.boolean().default(false) }))
+      .default([]),
     illustration: z.string(),
   }),
 });

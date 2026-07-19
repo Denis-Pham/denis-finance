@@ -88,7 +88,7 @@ const img = Object.entries(ills).find(([p]) => p.includes(`/${topic.data.illustr
           <div class="grid grid--3">
             {videos.map((v) => (
               <div data-reveal>
-                <VideoCard id={v.id} title={v.title} />
+                <VideoCard id={v.id} title={v.title} upcoming={v.upcoming} />
               </div>
             ))}
           </div>

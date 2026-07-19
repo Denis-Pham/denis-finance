@@ -7,6 +7,15 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.3.7] — 2026-07-19
+
+**Điền sẵn id thật cho 5 card "Sắp ra mắt" + cờ `upcoming` (Denis: "id có trong YouTube rồi, bỏ vào luôn"):**
+
+- Schema topics + `VideoCard.astro` + trang chủ đề: thêm field `upcoming: boolean` (default false) — card có id nhưng `upcoming: true` vẫn render "Sắp ra mắt" (video private hẹn giờ → link/thumbnail YouTube chưa hoạt động, không cho bấm nhầm).
+- Điền id: EP03 `F7D5e-4sg0M` (tiet-kiem, 22/7) · EP04 `zxqrecxw-L0` (no-va-tin-dung, 26/7) · EP05 `syPlRuNC-EA` · EP06 `HwX1yihRoPE` · EP07 `QZzI29LaHvE` (dau-tu, 30/7 · 2/8 · 5/8) — tất cả kèm `upcoming: true`.
+- EP08 (tai-chinh-doi-thuc, 8/8) chưa upload → id vẫn rỗng (pattern cũ vẫn dùng cho tập chưa upload).
+- **Pattern MỚI khi từng tập public:** chỉ xoá `"upcoming": true` + bỏ ngày khỏi title — id đã nằm sẵn, hết cảnh tra id.
+
 ## [0.3.6] — 2026-07-19
 
 **1 bài viết mới (Hermes, posts round 5):**
