@@ -7,6 +7,14 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.3.4] — 2026-07-19
+
+**Card "Sắp ra mắt" cho EP05–EP08 (lịch Denis chốt trong chat 19/7):**
+
+- Topic `dau-tu-cho-nguoi-moi`: 3 card — **EP05 Lãi kép** (thứ Năm 30/7, id thật `syPlRuNC-EA` điền sau public), **EP06 Rủi ro & Lợi nhuận** (CN 2/8, id `HwX1yihRoPE`), **EP07 Đa dạng hóa** (thứ Tư 5/8, id điền khi upload xong).
+- Topic `tai-chinh-doi-thuc`: card **EP08 Tăng thu nhập** (thứ Bảy 8/8, id điền khi upload xong).
+- Pattern giữ nguyên: card chờ = id rỗng + ngày trong title; public rồi = id thật + title sạch.
+
 ## [0.3.3] — 2026-07-19
 
 **Cập nhật lịch publish mới (Denis dời trong Studio 19/7, verify qua YouTube API):**
