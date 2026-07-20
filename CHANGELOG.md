@@ -7,6 +7,11 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.3.11] — 2026-07-20
+
+**Card EP11 (Denis: "làm luôn card ep11 trên site đi"):**
+
+- Topic `tai-chinh-doi-thuc`: thêm card **EP11 Tiền với cha mẹ già: biếu bao nhiêu là đủ?** (20:00 Chủ nhật 17/8) — id rỗng, điền ngay khi upload xong (đang sản xuất; lịch 17/8 Denis chốt trong chat). Arc gia đình ba thế hệ đủ bộ: EP09 vợ chồng · EP10 dạy con · EP11 cha mẹ già.
 ## [0.3.10] — 2026-07-20
 
 **Card EP10 (Denis: "làm luôn card ep10 trên site đi"):**
