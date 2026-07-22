@@ -7,6 +7,11 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.3.13] — 2026-07-21
+
+**Card EP12 (Denis chốt lịch 20/8 trong chat):**
+
+- Topic `tai-chinh-doi-thuc`: thêm card **EP12 Bảo hiểm: mua cái khiên, đừng mua cái mền** (20:00 thứ Tư 20/8) — id thật `EUMf-hV3gW8` (private hẹn giờ) + `upcoming: true`.
 ## [0.3.12] — 2026-07-20
 
 **Điền id EP11 (upload xong trong ngày, đúng lời hẹn 0.3.11):**
