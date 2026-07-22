@@ -7,6 +7,13 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.4.0] — 2026-07-21
+
+**Trang tổng kết Mùa 1 (Denis: "update lên trang của Ví nhà mình đi"):**
+
+- Thêm trang landing `/mua-1/` (`src/pages/mua-1.astro`) — toàn cảnh 13 tập: hero + 3 chỉ số mùa, hai mạch (dựng hệ EP01-08+13 / ba thế hệ EP09-11), timeline đủ 13 tập (video public link YouTube, tập hẹn giờ hiện ngày theo quy ước upcoming), bốn nguyên tắc gốc, CTA đóng mùa. Kiểu dark theme + BaseLayout như gioi-thieu.astro.
+- `Header.astro`: thêm mục nav "Mùa 1" (giữa Bài viết và Giới thiệu).
+- Cập nhật khi từng tập public: đổi `live: true` cho tập đó trong mảng episodes của trang.
 ## [0.3.14] — 2026-07-21
 
 **Card EP13 — SEASON FINALE (Denis chốt lịch 23/8 trong chat):**
