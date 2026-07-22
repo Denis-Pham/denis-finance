@@ -7,6 +7,11 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.3.14] — 2026-07-21
+
+**Card EP13 — SEASON FINALE (Denis chốt lịch 23/8 trong chat):**
+
+- Topic `tai-chinh-doi-thuc`: thêm card **EP13 Ráp cả hệ: một tháng của ví nhà mình — tập cuối mùa** (20:00 thứ Bảy 23/8) — id thật `RbpgJt1aZDg` (private hẹn giờ) + `upcoming: true`. ĐÓNG MÙA 1: đủ 13 tập trên kênh (EP01+02 public, EP03-13 hẹn giờ nhịp 3 ngày tới 23/8).
 ## [0.3.13] — 2026-07-21
 
 **Card EP12 (Denis chốt lịch 20/8 trong chat):**
