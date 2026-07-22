@@ -32,6 +32,11 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* Chặn cuộn ngang do transform 3D của reveal ở hero full-width (page-hero .wrap)
+     tràn lên cấp viewport — body{overflow-x:hidden} không bắt được. clip (không phải
+     hidden) để không tạo scroll-container: giữ sticky header + scroll-behavior + các
+     khối overflow-x:auto lồng bên trong. */
+  overflow-x: clip;
 }
 
 body {
