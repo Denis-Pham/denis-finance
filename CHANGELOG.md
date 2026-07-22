@@ -7,6 +7,11 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.4.1] — 2026-07-21
+
+**Fix cuộn ngang trên mobile (Denis: "kiểm tra lại trên mobile"):**
+
+- `global.css`: thêm `overflow-x: clip` vào `html`. Transform 3D của animation reveal ở hero full-width (`.page-hero .wrap[data-reveal]`) tràn ~18–27px lên cấp viewport → mobile cuộn ngang; `body{overflow-x:hidden}` sẵn có không bắt được vì overflow lọt lên documentElement. Dùng `clip` (không phải `hidden`) để không tạo scroll-container: giữ sticky header, scroll-behavior, và khối overflow-x:auto lồng trong. Bug SẴN của site (gioi-thieu cũng dính) — verify 375px: mua-1/gioi-thieu/home đều docScrollW=375, cuộn dọc + sticky nguyên.
 ## [0.4.0] — 2026-07-21
 
 **Trang tổng kết Mùa 1 (Denis: "update lên trang của Ví nhà mình đi"):**
