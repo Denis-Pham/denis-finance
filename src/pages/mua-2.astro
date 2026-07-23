@@ -1,0 +1,313 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, withBase } from '../config/site';
+
+/**
+ * Trang tổng quan Mùa 2 — "Bốn bể, một vòng" (13 tập).
+ * Concept: tiền là nước, nhà nào cũng có 4 cái bể (Kiếm/Giữ/Đầu tư/Xài) nối thành một vòng tròn.
+ * Mỗi tập một món đồ nghề (kế thừa DNA Mùa 1). Kịch bản đã xong; chưa lên sóng.
+ * Cập nhật khi từng tập public: đổi live=true + điền id/date cho tập đó (như mua-1.astro).
+ */
+const CH = SITE.channelUrl;
+
+type Ep = { n: string; be: string; title: string; tool: string; date: string; id: string; live: boolean };
+const episodes: Ep[] = [
+  { n: '01', be: 'Mở màn', title: 'Tiền nhà mình chảy thành vòng tròn — bốn cái bể ai cũng có', tool: 'Bánh xe nước bốn bể', date: 'Sắp lên', id: '', live: false },
+  { n: '02', be: 'Kiếm', title: 'Tiền nhà mình chảy vào từ mấy cái vòi?', tool: 'Bốn cái vòi', date: 'Sắp lên', id: '', live: false },
+  { n: '03', be: 'Kiếm', title: 'Tăng áp lực nước: làm sao để lương tự lớn?', tool: 'Cái bơm tăng áp', date: 'Sắp lên', id: '', live: false },
+  { n: '04', be: 'Kiếm', title: 'Trần thu nhập: bán giờ thì có ngày hết giờ để bán', tool: 'Cái trần & đồng hồ bấm giờ', date: 'Sắp lên', id: '', live: false },
+  { n: '05', be: 'Giữ', title: 'Van chia nước: mỗi đồng vào phải có chỗ đi ngay', tool: 'Cái van chia nước', date: 'Sắp lên', id: '', live: false },
+  { n: '06', be: 'Giữ', title: 'Lỗ rò: tiền biến mất mà không nhớ đã tiêu gì', tool: 'Vá lỗ rò', date: 'Sắp lên', id: '', live: false },
+  { n: '07', be: 'Giữ', title: 'Hai lớp chắn: cái phao và cái khiên', tool: 'Cái phao + cái khiên', date: 'Sắp lên', id: '', live: false },
+  { n: '08', be: 'Đầu tư', title: 'Nước đẻ ra nước: để tiền tự lớn khi mình ngủ', tool: 'Hạt mầm', date: 'Sắp lên', id: '', live: false },
+  { n: '09', be: 'Đầu tư', title: 'Không có bữa trưa miễn phí: rủi ro là cái giá của lời', tool: 'Cân hai đĩa', date: 'Sắp lên', id: '', live: false },
+  { n: '10', be: 'Đầu tư', title: 'Chia giỏ trứng cho cả nhà: danh mục đơn giản mà ngủ ngon', tool: 'Rổ trứng ba tầng', date: 'Sắp lên', id: '', live: false },
+  { n: '11', be: 'Xài', title: 'Xài cho đáng: món này đáng mấy giờ làm việc?', tool: 'Thước đo giờ công', date: 'Sắp lên', id: '', live: false },
+  { n: '12', be: 'Xài', title: 'Xài cho cả nhà: cho con, cho cha mẹ, cho cái Tết', tool: 'Mâm cơm chung', date: 'Sắp lên', id: '', live: false },
+  { n: '13', be: 'Xài', title: 'Khép vòng: xài đúng nuôi lại sức kiếm', tool: 'Bánh xe nước quay tròn', date: 'Sắp lên', id: '', live: false },
+];
+
+const watch = (id: string) => `https://www.youtube.com/watch?v=${id}`;
+
+// Màu nhận diện từng bể (dùng token global.css).
+const beColor: Record<string, string> = {
+  'Mở màn': 'var(--muted)',
+  'Kiếm': 'var(--emerald)',
+  'Giữ': 'var(--gold)',
+  'Đầu tư': 'var(--emerald-deep)',
+  'Xài': 'var(--gold-soft)',
+};
+
+const bers = [
+  { name: 'Kiếm', tagline: 'Nơi nước chảy vào', text: 'Thu nhập của cả nhà: đếm cho ra mấy cái vòi, rồi tăng áp cho nước chảy mạnh hơn.' },
+  { name: 'Giữ', tagline: 'Nơi nước không rò', text: 'Chia đúng chỗ, bịt mấy lỗ rò âm thầm, dựng cái phao và cái khiên chắn cú sốc.' },
+  { name: 'Đầu tư', tagline: 'Nơi nước sinh sôi', text: 'Để một phần nước tự lớn theo năm tháng — hiểu cái giá của lời, chia rổ cho ngủ ngon.' },
+  { name: 'Xài', tagline: 'Nơi nước nuôi sự sống', text: 'Xài cho đáng, cho cả nhà — rồi xài đúng lại quay về nuôi sức kiếm.' },
+];
+
+const principles = [
+  { n: '01', title: 'Thấy rõ trước khi sửa', text: 'Bật đèn lên trước đã — minh bạch với chính mình, và minh bạch trong nhà. Cái gì không thấy thì không sửa được.' },
+  { n: '02', title: 'Trả mình trước', text: 'Tương lai và cái phao được chia ngay khi tiền vừa vào, trước khi nó kịp bốc hơi qua trăm thứ lặt vặt.' },
+  { n: '03', title: 'Mỗi đồng một việc', text: 'Đồng tiền nào không được giao việc là đồng tiền đi lạc. Tiền có tên thì tiền ở lại.' },
+  { n: '04', title: 'Tiền là công cụ, không phải điểm số', text: 'Đích cuối là cả nhà nói được với nhau về tiền — không sợ, không giấu, không xấu hổ.' },
+];
+---
+
+<BaseLayout
+  title="Mùa 2 · Bốn bể, một vòng"
+  description="Toàn cảnh Mùa 2 của Ví Nhà Mình — bốn cái bể tiền (Kiếm, Giữ, Đầu tư, Xài) nối thành một vòng tròn, mười ba tập, mỗi tập một món đồ nghề."
+>
+  <section class="section page-hero">
+    <div class="wrap" data-reveal>
+      <p class="eyebrow">Mùa 2 · Sắp lên sóng</p>
+      <h1>Bốn bể, một vòng</h1>
+      <p class="lead">
+        Tiền trong một gia đình chảy như nước, qua <em>bốn cái bể</em> — Kiếm, Giữ, Đầu tư, Xài —
+        nối nhau thành một vòng tròn không nghỉ. Mười ba tập, mỗi tập một món đồ nghề, ráp lại thành
+        một hệ chạy được cho nhà mình: nước kiếm về, giữ cho khỏi rò, cho sinh sôi, rồi xài cho đáng —
+        và xài đúng lại quay về nuôi sức kiếm.
+      </p>
+      <div class="season-stats">
+        <div><strong>13</strong><span>tập trọn mùa</span></div>
+        <div><strong>4</strong><span>cái bể</span></div>
+        <div><strong>1</strong><span>vòng khép kín</span></div>
+      </div>
+      <a class="btn" href={CH} target="_blank" rel="noopener noreferrer">Xem trên {SITE.channelHandle}</a>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="grid grid--2 arc-grid">
+        <div class="card arc" data-reveal>
+          <h2>Bốn cái bể</h2>
+          <p>
+            Nhà nào cũng có bốn cái bể tiền. <strong>Bể Kiếm</strong> là nơi nước chảy vào.
+            <strong>Bể Giữ</strong> giữ cho nước khỏi rò. <strong>Bể Đầu tư</strong> để nước tự sinh sôi.
+            <strong>Bể Xài</strong> là nơi nước nuôi sự sống. Mỗi bể một cụm ba tập, mỗi tập một món đồ nghề dùng được ngay.
+          </p>
+        </div>
+        <div class="card arc" data-reveal>
+          <h2>Một vòng tròn</h2>
+          <p>
+            Bốn bể không rời nhau. Kiếm đổ vào Giữ, Giữ chia bớt sang Đầu tư, Đầu tư nuôi cho bể Xài dư dả hơn.
+            Và đây là chỗ hay nhất: <strong>xài đúng chỗ</strong> — sức khỏe, một cái nghề, quan hệ tử tế, nghỉ ngơi đủ —
+            lại quay về nuôi chính <strong>bể Kiếm</strong>. Nước chảy trọn một vòng, rồi bắt đầu vòng mới.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>Bốn cái bể của nhà mình</p>
+      <h2 class="timeline-head" data-reveal>Nước chảy qua đâu</h2>
+      <div class="grid grid--4 be-grid">
+        {
+          bers.map((b) => (
+            <div class="card be" data-reveal style={`--be:${beColor[b.name]}`}>
+              <span class="be-name">Bể {b.name}</span>
+              <span class="be-tagline">{b.tagline}</span>
+              <p>{b.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>Trọn 13 tập</p>
+      <h2 class="timeline-head" data-reveal>Cả mùa, theo thứ tự</h2>
+      <ol class="timeline">
+        {
+          episodes.map((e) => (
+            <li class="ep" data-reveal>
+              <span class="ep-n">{e.n}</span>
+              <div class="ep-body">
+                <h3 class="ep-title">{e.title}</h3>
+                <span class="ep-meta-row">
+                  <span class="ep-be" style={`--be:${beColor[e.be]}`}>{e.be}</span>
+                  <span class="ep-tool">{e.tool}</span>
+                </span>
+              </div>
+              <div class="ep-meta">
+                {e.live ? (
+                  <a class="ep-watch" href={watch(e.id)} target="_blank" rel="noopener noreferrer">
+                    Đang chiếu →
+                  </a>
+                ) : (
+                  <span class="ep-date">{e.date}</span>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>Rút cả mùa thành bốn câu</p>
+      <h2 class="timeline-head" data-reveal>Bốn nguyên tắc gốc</h2>
+      <div class="grid grid--2 principle-grid">
+        {
+          principles.map((p) => (
+            <div class="card principle" data-reveal>
+              <span class="principle-n">{p.n}</span>
+              <h3>{p.title}</h3>
+              <p>{p.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cta-final card" data-reveal>
+        <div>
+          <p class="eyebrow">Mùa 2 đang được dựng</p>
+          <h2>Bốn cái bể, một vòng nước — cho cả nhà mình.</h2>
+          <p class="lead">
+            Mười ba tập đang trên bàn dựng. Đăng ký kênh để không bỏ lỡ tập đầu tiên,
+            và để lại một dòng cho mình biết: nhà bạn đang rò ở bể nào?
+          </p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn" href={CH} target="_blank" rel="noopener noreferrer">Đăng ký {SITE.channelHandle}</a>
+          <a class="btn btn--ghost" href={withBase('/mua-1/')}>Xem lại Mùa 1</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero h1 {
+    font-size: clamp(34px, 5.4vw, 58px);
+    margin: 16px 0 14px;
+  }
+  .page-hero { padding-bottom: 40px; }
+  .page-hero .lead { max-width: 62ch; }
+
+  .season-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin: 30px 0 28px;
+  }
+  .season-stats div { display: flex; flex-direction: column; gap: 2px; }
+  .season-stats strong {
+    font: 700 30px/1 var(--font-display);
+    color: var(--gold);
+  }
+  .season-stats span { color: var(--muted); font-size: 13.5px; }
+
+  .arc-grid { gap: 28px; }
+  .arc { padding: 30px 28px; }
+  .arc h2 { font-size: 22px; margin: 0 0 12px; }
+  .arc p { color: var(--muted); font-size: 15px; margin: 0; }
+  .arc strong { color: var(--fg); font-weight: 600; }
+
+  .timeline-head { font-size: clamp(24px, 3.4vw, 34px); margin: 10px 0 28px; }
+
+  /* Bốn cái bể — thẻ nhận diện màu theo --be */
+  .be-grid { gap: 20px; }
+  .be {
+    padding: 26px 24px 28px;
+    border-top: 2px solid var(--be, var(--gold));
+  }
+  .be-name {
+    display: block;
+    font: 700 19px/1 var(--font-display);
+    color: var(--be, var(--gold));
+    margin-bottom: 6px;
+  }
+  .be-tagline {
+    display: block;
+    color: var(--muted-soft, var(--muted));
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .be p { color: var(--muted); font-size: 14px; margin: 0; }
+
+  .timeline { list-style: none; margin: 0; padding: 0; }
+  .ep {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 0;
+    border-top: 1px solid var(--border);
+  }
+  .ep:last-child { border-bottom: 1px solid var(--border); }
+  .ep-n {
+    font: 700 16px/1 var(--font-display);
+    color: var(--gold);
+    letter-spacing: 0.04em;
+    width: 34px;
+    flex-shrink: 0;
+  }
+  .ep-body { flex: 1; min-width: 0; }
+  .ep-title { font-size: 16.5px; font-weight: 600; margin: 0 0 6px; }
+  .ep-meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .ep-be {
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--be, var(--gold));
+    border: 1px solid color-mix(in srgb, var(--be, var(--gold)) 45%, transparent);
+    padding: 2px 9px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .ep-tool { color: var(--muted); font-size: 13px; }
+  .ep-meta { flex-shrink: 0; text-align: right; }
+  .ep-date { color: var(--muted); font-size: 13.5px; font-variant-numeric: tabular-nums; }
+  .ep-watch {
+    color: var(--gold);
+    font-size: 13.5px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .ep-watch:hover { text-decoration: underline; }
+
+  .principle-grid { gap: 22px; }
+  .principle { padding: 28px 26px 30px; }
+  .principle-n {
+    display: block;
+    font: 700 14px/1 var(--font-display);
+    color: var(--gold);
+    letter-spacing: 0.14em;
+    margin-bottom: 18px;
+  }
+  .principle h3 { font-size: 19px; margin: 0 0 8px; }
+  .principle p { color: var(--muted); font-size: 14.5px; margin: 0; }
+  .principle-grid .principle:first-child { border-top: 2px solid var(--gold-deep, var(--gold)); }
+
+  .cta-final {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: clamp(34px, 5vw, 60px);
+    background:
+      radial-gradient(90% 140% at 100% 0%, rgba(212, 175, 55, 0.09), transparent 55%),
+      var(--surface);
+  }
+  .cta-final h2 { font-size: clamp(24px, 3.4vw, 34px); margin: 14px 0 12px; max-width: 24ch; }
+  .cta-final .lead { margin: 0; max-width: 52ch; }
+  .cta-actions { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+
+  @media (max-width: 820px) {
+    .cta-final { flex-direction: column; align-items: flex-start; }
+    .cta-actions { flex-direction: row; flex-wrap: wrap; }
+    .season-stats { gap: 28px; }
+  }
+</style>

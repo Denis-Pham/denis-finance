@@ -7,6 +7,14 @@
 > 4. Chủ đề = file json trong `src/content/topics/` (mỗi chủ đề map 1 playlist YouTube); bài viết = markdown trong `src/content/posts/`.
 > 5. Code nằm ở `D:\claude agent\denis-finance` (npm không chạy trên Google Drive). Không commit `dist/`, `node_modules/`.
 
+## [0.5.0] — 2026-07-23
+
+**Trang tổng quan Mùa 2 "Bốn bể, một vòng" (Denis: "dựng trang mua-2.astro luôn đi"):**
+
+- Thêm trang landing `/mua-2/` (`src/pages/mua-2.astro`) — concept 4 bể tiền (Kiếm/Giữ/Đầu tư/Xài) nối thành một vòng tròn: hero + 3 chỉ số mùa (13 tập / 4 cái bể / 1 vòng khép kín), hai arc card (Bốn cái bể / Một vòng tròn), lưới 4 bể có màu nhận diện (emerald/gold/emerald-deep/gold-soft), timeline đủ 13 tập với chip bể + đồ nghề (đang "Sắp lên", chưa lên sóng), bốn nguyên tắc gốc (kế thừa Mùa 1), CTA. Kế thừa pattern `mua-1.astro`.
+- `Header.astro`: thêm mục nav "Mùa 2" (sau "Mùa 1").
+- Cập nhật khi từng tập public: điền `id`/`date` + đổi `live: true` cho tập đó trong mảng episodes (như mua-1).
+- Bối cảnh: kịch bản 13 tập Mùa 2 đã viết xong (T1-10 qua Neo review đối kháng; T11-13 chờ Neo); render/publish chờ Denis bật đèn xanh.
 ## [0.4.1] — 2026-07-21
 
 **Fix cuộn ngang trên mobile (Denis: "kiểm tra lại trên mobile"):**
